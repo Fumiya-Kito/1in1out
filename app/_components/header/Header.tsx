@@ -19,8 +19,7 @@ function Header() {
           </div>
         )}
 
-        <Link href="/search">🔍</Link>
-        <div>User Profile</div>
+        <div><Link href="/search">🔍</Link></div>
       </div>
     </header>
   );
