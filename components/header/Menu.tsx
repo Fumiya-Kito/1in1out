@@ -25,14 +25,14 @@ function Menu() {
               label="inventory"
               onClick={() => {
                 setIsOpen(false);
-                router.push("/inventory");
+                router.push("/");
               }}
             />
             <MenuItem 
               label="wishlist"
               onClick={() => {
                 setIsOpen(false);
-                router.push("/wishlist");
+                router.push("/monolist/0_wishlist");
               }}
             />
             <MenuItem 
