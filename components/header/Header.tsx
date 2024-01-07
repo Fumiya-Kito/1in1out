@@ -7,15 +7,12 @@ import EditIcon from "../icons/EditIcon";
 
 function Header() {
   const pathname = usePathname();
-  const isHome = pathname === "/" ? true : false;
-  const isMonoList = pathname.includes("monolist") ? true : false;
-  
-  const underIdx = pathname.indexOf("_");
-  const lastSlashIdx = pathname.lastIndexOf("/");
+  const isHome = pathname === "/";
+  const isMonoList = pathname.includes("monolist");
 
-  const categoryId = underIdx === -1 ? "" : pathname.substring(lastSlashIdx + 1, underIdx);
-  const categoryName = underIdx === -1 ? "" : pathname.substring(underIdx + 1);
-
+  const match = pathname.match(/\/(\d+)_([^\/]+)$/);
+  const categoryId = match?.[1] || "";
+  const categoryName = match?.[2] || "";
   const isNotWishList = !!+categoryId;
 
   return (
