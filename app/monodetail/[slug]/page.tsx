@@ -1,5 +1,6 @@
 import Link from "next/link";
-import EditIcon from "@/components/icons/EditIcon";
+import { FiEdit } from "react-icons/fi";
+
 
 type MonoDetailProps = {
   params: {
@@ -18,7 +19,7 @@ export default function MonoDetailPage({ params }: MonoDetailProps) {
       <div>
         <Link href={`/monoedit/${params.slug}`}>
           Edit This Mono
-          <EditIcon />
+          <FiEdit />
         </Link>
       </div>
     </main>

@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Menu from "./Menu";
 import { usePathname } from "next/navigation";
-import EditIcon from "../icons/EditIcon";
+import { FiEdit } from "react-icons/fi";
+import { CiSearch } from "react-icons/ci";
 
 function Header() {
   const pathname = usePathname();
@@ -30,12 +31,12 @@ function Header() {
       {isMonoList && categoryId && categoryName && (
         <>
           <h2>{categoryName}</h2>
-          {isNotWishList && <Link href={`/categoryedit/${categoryId}`}><EditIcon /></Link>}
+          {isNotWishList && <Link href={`/categoryedit/${categoryId}`}><FiEdit /></Link>}
         </>
       )}
 
       <div>
-        <Link href="/search">🔍</Link>
+        <Link href="/search"><CiSearch /></Link>
       </div>
     </header>
   );

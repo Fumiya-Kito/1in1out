@@ -18,7 +18,7 @@ export default function CategoryList({ data }: CategoryListProps) {
       {data.map((category) => (
         <ul key={category.id}>
           {category.icon}
-          <Link href={`/monolist/${category.id}`}>{category.name}</Link>
+          <Link href={`/monolist/${category.id}_${category.name}`}>{category.name}</Link>
         </ul>
       ))}
     </li>

@@ -1,14 +1,15 @@
 import Link from "next/link";
 import MonoList from "@/components/lists/monolist";
-import ComputerIcon from "@/components/icons/ComputerIcon";
+// import ComputerIcon from "@/components/icons/ComputerIcon";
+import { HiOutlineComputerDesktop } from "react-icons/hi2"
 
 export default function InventoryPage() {
   // data fetchingを行う
   const DUMMY_MONOS = [
-    { id: 1, category_id: 1, icon: <ComputerIcon />, name: 'mono1', reason: 'reason1' },
-    { id: 2, category_id: 2, icon: <ComputerIcon />, name: 'mono2', reason: 'reason2' },
-    { id: 3, category_id: 3, icon: <ComputerIcon />, name: 'mono3', reason: 'reason3' },
-    { id: 4, category_id: 4, icon: <ComputerIcon />, name: 'mono4', reason: 'reason4' },
+    { id: 1, category_id: 1, icon: <HiOutlineComputerDesktop />, name: 'mono1', reason: 'reason1' },
+    { id: 2, category_id: 2, icon: <HiOutlineComputerDesktop />, name: 'mono2', reason: 'reason2' },
+    { id: 3, category_id: 3, icon: <HiOutlineComputerDesktop />, name: 'mono3', reason: 'reason3' },
+    { id: 4, category_id: 4, icon: <HiOutlineComputerDesktop />, name: 'mono4', reason: 'reason4' },
   ];
 
   return (
