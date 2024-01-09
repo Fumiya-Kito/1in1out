@@ -1,6 +1,6 @@
-'use client';
+// 'use client';
 
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import Link from "next/link";
 
 type MonoListProps = {
@@ -13,7 +13,7 @@ type MonoListProps = {
   }[];
 }
 
-export default function MonoList({ data }: MonoListProps) {
+export default function MonoLinkList({ data }: MonoListProps) {
   return (
     <li className="list-none">
       {data.map((mono) => (

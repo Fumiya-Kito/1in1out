@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MonoList from "@/components/lists/monolist";
+import MonoList from "@/components/links/MonoLinkList";
 // import ComputerIcon from "@/components/icons/ComputerIcon";
 import { HiOutlineComputerDesktop } from "react-icons/hi2"
 

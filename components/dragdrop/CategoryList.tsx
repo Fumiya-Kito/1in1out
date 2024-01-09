@@ -1,6 +1,3 @@
-'use client';
-
-import { useParams } from "next/navigation";
 import Link from "next/link";
 
 type CategoryListProps = {
@@ -18,7 +15,8 @@ export default function CategoryList({ data }: CategoryListProps) {
       {data.map((category) => (
         <ul key={category.id}>
           {category.icon}
-          <Link href={`/monolist/${category.id}_${category.name}`}>{category.name}</Link>
+          {category.name}
+          {category.upper_limit}
         </ul>
       ))}
     </li>

@@ -22,10 +22,17 @@ function Menu() {
         <div>
           <div className="cursor-pointer">
             <MenuItem 
-              label="inventory"
+              label="exchange"
               onClick={() => {
                 setIsOpen(false);
                 router.push("/");
+              }}
+            />
+            <MenuItem 
+              label="inventory"
+              onClick={() => {
+                setIsOpen(false);
+                router.push("/categorylist");
               }}
             />
             <MenuItem 
@@ -33,13 +40,6 @@ function Menu() {
               onClick={() => {
                 setIsOpen(false);
                 router.push("/monolist/0_wishlist");
-              }}
-            />
-            <MenuItem 
-              label="exchange"
-              onClick={() => {
-                setIsOpen(false);
-                router.push("/exchange");
               }}
             />
           </div>
