@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 type CategoryListProps = {
   data: {
     id: number, 
@@ -14,7 +12,7 @@ export default function CategoryList({ data }: CategoryListProps) {
     <li className="list-none">
       {data.map((category) => (
         <ul key={category.id}>
-          {category.icon}
+          {/* {category.icon} */}
           {category.name}
           {category.upper_limit}
         </ul>

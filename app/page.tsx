@@ -3,27 +3,30 @@ import { HiOutlineComputerDesktop } from "react-icons/hi2";
 import { HiOutlineBattery0 } from "react-icons/hi2";
 import { HiOutlineCake } from "react-icons/hi2";
 
+
+/* TODO: CategoryList Componentでマッピング */
+
 export default function ExchangePage() {
   const DUMMY_WISH = [
     {
       id: 1,
-      category_id: 1,
+      category_id: 0,
       icon: <HiOutlineComputerDesktop />,
-      name: "mono1",
+      name: "WISH1",
       reason: "reason1",
     },
     {
       id: 2,
-      category_id: 2,
+      category_id: 0,
       icon: <HiOutlineBattery0 />,
-      name: "mono2",
+      name: "WISH2",
       reason: "reason2",
     },
     {
       id: 3,
-      category_id: 3,
+      category_id: 0,
       icon: <HiOutlineCake />,
-      name: "mono3",
+      name: "WISH3",
       reason: "reason3",
     },
   ];

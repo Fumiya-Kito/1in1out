@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Mono from "./Mono";
 
 type MonoListProps = {
   data: {
@@ -12,13 +13,9 @@ type MonoListProps = {
 
 export default function MonoList({ data }: MonoListProps) {
   return (
-    <li className="list-none">
+    <li className="list-none flex">
       {data.map((mono) => (
-        <ul key={mono.id}>
-          {mono.icon}
-          {mono.name}
-          {mono.reason}
-        </ul>
+        <Mono item={mono} />
       ))}
     </li>
   )
