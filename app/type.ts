@@ -2,7 +2,7 @@ export type Category = {
   id: number; 
   icon: JSX.Element; 
   name: string; 
-  upper_limit: number;
+  upper_limit?: number;
   mono_data?: Mono[];
 };
 
