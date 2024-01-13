@@ -4,9 +4,6 @@ import { CiSearch } from "react-icons/ci";
 import PageTitle from "./PageTitle";
 
 function Header() {
-  /**TODO serverコンポーネント化、子コンポーネントで分岐する */
-
-
   return (
     <header className="p-6 bg-gray-800">
       <Menu />

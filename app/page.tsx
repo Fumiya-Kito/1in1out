@@ -1,5 +1,4 @@
 import CategoryList from "@/components/dragdrop/CategoryList";
-import MonoList from "@/components/dragdrop/MonoList";
 import { HiOutlineComputerDesktop } from "react-icons/hi2";
 import { HiOutlineBattery0 } from "react-icons/hi2";
 import { HiOutlineCake } from "react-icons/hi2";
