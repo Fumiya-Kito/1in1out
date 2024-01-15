@@ -81,7 +81,7 @@ export default function NewMonoPage() {
     <section>
       <h2>New Mono Page</h2>
       <form onSubmit={registrationHandler}>
-        <div className="w-1/5 text-black">
+        <div className="text-black">
           {isMounted ? (
             <>
               <Select
@@ -89,13 +89,14 @@ export default function NewMonoPage() {
                 onChange={(value) =>
                   value ? setSelectedCategory(value) : undefined
                 }
-                className="my-2"
+                className="w-64 my-2"
               />
               <Select
                 options={iconOptions}
                 onChange={(value) =>
                   value ? setSelectedIcon(value) : undefined
                 }
+                className="w-64 my-2"
               />
             </>
           ) : null}
