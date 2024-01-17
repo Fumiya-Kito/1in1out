@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { MongoClient } from "mongodb";
 
 async function POST(request: Request) {
@@ -19,18 +19,18 @@ async function POST(request: Request) {
   }
 }
 
-async function GET(request: Request) {
+async function GET(request: NextRequest) {
   try {
-    // // リクエストボディの取得
-    // const body = await request.json();
-    // const { category_id } = body;
-    
+    // クエリからカテゴリーIDを取得
+    const searchParams = request.nextUrl.searchParams;
+    const categoryId = searchParams.get('category_id')!;
+
     /** 接続はlibに移行, 毎回MonogoDbClientをインスタンス化させないため */
     const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
     const db = client.db();
-    const response = await db.collection("monos").find().toArray();
+    const response = await db.collection("monos").find({ "category_id": +categoryId }).toArray();
     client.close();
-    return NextResponse.json({mongo_data: response}, {status: 200 });
+    return NextResponse.json(response, {status: 200 });
   } catch (err) {
     console.error(err);
     return new NextResponse("Error", { status: 500 });

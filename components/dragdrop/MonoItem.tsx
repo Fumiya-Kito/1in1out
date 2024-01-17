@@ -15,7 +15,7 @@ export default function MonoItem({ item, categories }: MonoProps) {
   };
 
   return (
-    <ul key={item.id} className="p-1 m-2 bg-blue-950">
+    <ul key={item._id} className="p-1 m-2 bg-blue-950">
       {item.icon}
       <p>{item.name}</p>
       <p>{item.reason}</p>

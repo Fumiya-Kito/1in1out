@@ -7,9 +7,9 @@ export type Category = {
 };
 
 export type Mono = {
-  id: number;
+  _id: number;
   category_id: number;
-  icon: JSX.Element;
+  icon: JSX.Element | string;
   name: string;
   reason: string;
 };
