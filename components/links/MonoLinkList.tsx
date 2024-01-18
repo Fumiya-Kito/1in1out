@@ -10,7 +10,7 @@ export default function MonoLinkList({ data }: MonoListProps) {
     <li className="list-none">
       {data.map((mono) => (
         <ul key={mono._id}>
-          {mono.icon}
+          <p>{mono.iconJsx}</p>
           <Link href={`/monodetail/${mono._id}`}>{mono.name}</Link>
         </ul>
       ))}
