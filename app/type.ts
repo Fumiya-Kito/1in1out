@@ -12,5 +12,5 @@ export type Mono = {
   icon: string;
   iconJsx?: JSX.Element;
   name: string;
-  reason: string;
+  reason?: string;
 };

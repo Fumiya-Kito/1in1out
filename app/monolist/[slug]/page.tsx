@@ -1,7 +1,5 @@
 import Link from "next/link";
 import MonoLinkList from "@/components/links/MonoLinkList";
-// import ComputerIcon from "@/components/icons/ComputerIcon";
-// import { HiOutlineComputerDesktop } from "react-icons/hi2";
 import { getIconByString } from "@/components/icons/icons";
 import { Mono } from "@/app/type";
 
@@ -23,7 +21,6 @@ export default async function InventoryPage(
   const [categoryId, _] = slug.split('_');
   const monoList: Mono[] = await getMonos(categoryId);
 
-  console.log(monoList);
   const monoListWithIcon = monoList.map(mono => {
     return {
       ...mono,

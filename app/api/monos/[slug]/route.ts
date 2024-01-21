@@ -1,25 +1,23 @@
-
-import { NextResponse } from "next/server";
-import { MongoClient } from "mongodb";
+import { NextResponse, NextRequest } from "next/server";
+import { MongoClient, ObjectId } from "mongodb";
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  console.log('from slug');
-
   try {
-    // // リクエストボディの取得
-    const categoryId = params.slug;
-    console.log(params.slug);
+    // monoIDを取得
+    const monoId = params.slug;
 
     /** 接続はlibに移行, 毎回MonogoDbClientをインスタンス化させないため */
     const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
     const db = client.db();
-    // const response = await db.collection("monos").find({ "category_id": categoryId }).toArray();
-    const documents = await db.collection("monos").find().toArray();
+    const response = await db
+      .collection("monos")
+      .findOne({ _id: new ObjectId(monoId) })
+    
     client.close();
-    return NextResponse.json({ monos: documents});
+    return NextResponse.json(response, { status: 200 });
   } catch (err) {
     console.error(err);
     return new NextResponse("Error", { status: 500 });
