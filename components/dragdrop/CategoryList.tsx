@@ -6,9 +6,9 @@ type CategoryListProps = {
 };
 
 export default function CategoryList({ data }: CategoryListProps) {
-  const categoryIds = data.map((category) => category.id);
-  const wishlist = data.find((category) => category.id === 0);
-  const inventory = data.filter((category) => category.id !== 0);
+  const categoryIds = data.map((category) => category._id);
+  const wishlist = data.find((category) => category._id === 0);
+  const inventory = data.filter((category) => category._id !== 0);
 
   console.log(wishlist);
 
@@ -29,7 +29,7 @@ export default function CategoryList({ data }: CategoryListProps) {
 
       <div className={"p-3 bg-green-900"}>
         {inventory.map((category) => (
-          <div key={category.id} className="p-2 m-2 bg-sky-900">
+          <div key={category._id} className="p-2 m-2 bg-sky-900">
             {category.icon}
             <h3>{category.name}</h3>
             <p>{category.upper_limit}</p>

@@ -1,12 +1,3 @@
-export type Category = {
-  id: number; 
-  icon: string; 
-  iconJsx: JSX.Element;
-  name: string; 
-  upper_limit?: number;
-  mono_data?: Mono[];
-};
-
 export type Mono = {
   _id: string;
   category_id: number;
@@ -15,3 +6,13 @@ export type Mono = {
   name: string;
   reason?: string;
 };
+
+export type Category = {
+  _id: number; 
+  icon: string; 
+  name: string; 
+  iconJsx?: JSX.Element;
+  upper_limit?: number;
+  mono_data?: Mono[];
+};
+
