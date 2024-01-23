@@ -2,26 +2,19 @@
 
 // import { useParams } from "next/navigation";
 import Link from "next/link";
+import { Category } from "@/app/type";
 
-type CategoryListProps = {
-  data: {
-    id: number, 
-    icon: JSX.Element, 
-    name: string, 
-    upper_limit: number
-  }[];
-}
-
-export default function CategoryLinkList({ data }: CategoryListProps) {
+export default function CategoryLinkList({ data }: { data: Category[] }) {
   return (
     <li className="list-none">
       {data.map((category) => (
-        <ul key={category.id}>
-          {category.icon}
-          <Link href={`/monolist/${category.id}_${category.name}`}>{category.name}</Link>
+        <ul key={category._id}>
+          <Link href={`/monolist/${category._id}_${category.name}`}>
+            {category.iconJsx}
+            {category.name}
+          </Link>
         </ul>
       ))}
     </li>
-  )
+  );
 }
-

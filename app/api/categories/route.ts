@@ -39,14 +39,9 @@ async function POST(request: Request) {
 
 async function GET(request: NextRequest) {
   try {
-    // クエリからカテゴリーIDを取得
-    // const searchParams = request.nextUrl.searchParams;
-    // const categoryId = searchParams.get('category_id')!;
-
-    /** 接続はlibに移行, 毎回MonogoDbClientをインスタンス化させないため */
     const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
     const db = client.db();
-    const response = await db.collection("monos").find().toArray();
+    const response = await db.collection("categories").find().toArray();
     client.close();
     return NextResponse.json(response, {status: 200 });
   } catch (err) {
