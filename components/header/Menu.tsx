@@ -44,7 +44,7 @@ function Menu() {
                   label="wishlist"
                   onClick={() => {
                     setIsOpen(false);
-                    router.push("/monolist/0_wishlist");
+                    router.push("/monolist/1_wishlist");
                   }}
                 />
               </div>

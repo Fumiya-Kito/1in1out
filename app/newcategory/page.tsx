@@ -70,7 +70,7 @@ export default function SearchPage() {
 
   return (
     <section>
-      <h2>New Mono Page</h2>
+      <h2>New Category Page</h2>
       <form onSubmit={registrationHandler}>
         <div className="text-black">
           {isMounted ? (

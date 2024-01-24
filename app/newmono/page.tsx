@@ -16,10 +16,11 @@ type Options = {
 };
 
 export default function NewMonoPage() {
+  /** Optionを取得してこないとだめ*/
   const categoryOptions = [
-    { value: 0, label: "wishlist" },
-    { value: 1, label: "Category1" },
-    { value: 2, label: "Category2" },
+    { value: 1, label: "wishlist" },
+    { value: 2, label: "Category1" },
+    { value: 3, label: "Category2" },
   ];
 
   const iconOptions = [
