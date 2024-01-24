@@ -7,8 +7,8 @@ type CategoryListProps = {
 
 export default function CategoryList({ data }: CategoryListProps) {
   const categoryIds = data.map((category) => category._id);
-  const wishlist = data.find((category) => category._id === 0);
-  const inventory = data.filter((category) => category._id !== 0);
+  const wishlist = data.find((category) => category._id === 1);
+  const inventory = data.filter((category) => category._id !== 1);
 
   console.log(wishlist);
 

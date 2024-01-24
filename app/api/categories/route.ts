@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { Db, MongoClient, ObjectId, ModifyResult, Document } from "mongodb";
+import { Db, MongoClient } from "mongodb";
 
 const getNextCategoryID = async function(db: Db) {
   const result = await db.collection("counters").findOneAndUpdate(

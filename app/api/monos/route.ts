@@ -23,12 +23,15 @@ async function GET(request: NextRequest) {
   try {
     // クエリからカテゴリーIDを取得
     const searchParams = request.nextUrl.searchParams;
-    const categoryId = searchParams.get('category_id')!;
+    const categoryId = searchParams.get('category_id');
 
     /** 接続はlibに移行, 毎回MonogoDbClientをインスタンス化させないため */
     const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
     const db = client.db();
-    const response = await db.collection("monos").find({ "category_id": +categoryId }).toArray();
+
+    const findCondition = categoryId ? { "category_id": +categoryId } : {};
+
+    const response = await db.collection("monos").find(findCondition).toArray();
     client.close();
     return NextResponse.json(response, {status: 200 });
   } catch (err) {
