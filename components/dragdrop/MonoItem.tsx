@@ -16,7 +16,7 @@ export default function MonoItem({ item, categories }: MonoProps) {
 
   return (
     <ul key={item._id} className="p-1 m-2 bg-blue-950">
-      {item.icon}
+      {item.iconJsx}
       <p>{item.name}</p>
       <p>{item.reason}</p>
       <p>categoryID(state): {categoryId}</p>

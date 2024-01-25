@@ -17,7 +17,7 @@ export default function CategoryList({ data }: CategoryListProps) {
     {wishlist && (
       <div className={"p-3 bg-pink-900"}>
           <div className="p-2 bg-sky-900">
-            {wishlist.icon}
+            {wishlist.iconJsx}
             <h3>{wishlist.name}</h3>
             <p>{wishlist.upper_limit}</p>
             {wishlist.mono_data && (
@@ -30,7 +30,7 @@ export default function CategoryList({ data }: CategoryListProps) {
       <div className={"p-3 bg-green-900"}>
         {inventory.map((category) => (
           <div key={category._id} className="p-2 m-2 bg-sky-900">
-            {category.icon}
+            {category.iconJsx}
             <h3>{category.name}</h3>
             <p>{category.upper_limit}</p>
             {category.mono_data && (
