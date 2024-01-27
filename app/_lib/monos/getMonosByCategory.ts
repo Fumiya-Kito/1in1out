@@ -5,9 +5,9 @@ export default async function getMonosByCategory(
   categoryId: string | undefined
 ) {
   const fetchURI = categoryId
-    ? `http://localhost:3000/api/monos?category_id=${categoryId}`
-    : "http://localhost:3000/api/monos";
-    
+    ? `${process.env.DEV_HOST}/api/monos?category_id=${categoryId}`
+    : `${process.env.DEV_HOST}/api/monos`;
+
   const res = await fetch(
     fetchURI,
     { cache: "no-cache" }
