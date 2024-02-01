@@ -1,10 +1,13 @@
+import { getMono } from "@/app/_lib/monos/getMono";
+
 type MonoEditProps = {
   params: {
-    slug: number;
+    slug: string;
   }
 }
 
-export default function MonoDetailPage({ params }: MonoEditProps) {
+export default async function MonoDetailPage({ params }: MonoEditProps) {
+  const mono = await getMono(params.slug);
   return (
     <main>
       <div>
