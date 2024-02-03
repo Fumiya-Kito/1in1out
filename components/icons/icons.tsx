@@ -3,14 +3,14 @@ import { HiOutlineComputerDesktop } from "react-icons/hi2"
 import { HiOutlineCake } from "react-icons/hi2"
 import { PiBowlFood } from "react-icons/pi"
 
-export function getIconFormList() {
-  const iconFormOptions = [
-    { value: "battery", label: <HiOutlineBattery0 color={"#000"} /> },
-    { value: "desktop", label: <HiOutlineComputerDesktop color={"#000"} /> },
-    { value: "cake", label: <HiOutlineCake color={"#000"} /> },
-    { value: "pibow", label: <PiBowlFood color={"#000"} /> },
-  ];
-}
+export const iconFormOptions = [
+  { value: "battery", label: <HiOutlineBattery0 color={"#000"} /> },
+  { value: "desktop", label: <HiOutlineComputerDesktop color={"#000"} /> },
+  { value: "cake", label: <HiOutlineCake color={"#000"} /> },
+  { value: "pibow", label: <PiBowlFood color={"#000"} /> },
+];
+// export function getIconFormList() {
+// }
 
 export function getIconByString(target: string) {
   const allIcons = [
