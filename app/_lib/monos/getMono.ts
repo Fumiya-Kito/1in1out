@@ -1,7 +1,7 @@
 import { getIconByString } from "@/components/icons/icons";
 
 export async function getMono(monoId: string) {
-  const res = await fetch(`http://localhost:3000/api/monos/${monoId}`, {
+  const res = await fetch(`${process.env.HOST}/api/monos/${monoId}`, {
     cache: "no-store",
   });
   const resData = await res.json();
