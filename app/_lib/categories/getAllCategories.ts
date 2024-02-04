@@ -2,7 +2,7 @@ import { Category } from "@/app/type";
 import { getIconByString } from "@/components/icons/icons";
 
 export default async function getAllCategories() {
-  const res = await fetch(`${process.env.DEV_HOST}/api/categories`, {
+  const res = await fetch(`${process.env.HOST}/api/categories`, {
     cache: "no-cache",
   });
   const resData: Category[] = await res.json();
