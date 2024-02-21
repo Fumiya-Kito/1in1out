@@ -1,15 +1,16 @@
+import Form from '@/components/form/Form';
+
 type CategoryEditProps = {
   params: {
     slug: number;
   }
 }
 
-export default function CategoryDetailPage({ params }: CategoryEditProps) {
+export default function CategoryEditPage({ params }: CategoryEditProps) {
   return (
-    <main>
-      <div>
-        <h1 className="text-center text-5xl font-bold mb-3">This is Category Edit Page: {params.slug}</h1>
-      </div>
-    </main>
+    <section>
+      <h2>New Category Page</h2>
+      <Form type={"UPDATE"}/>
+    </section>
   );
 }

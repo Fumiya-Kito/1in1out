@@ -16,3 +16,4 @@ export type Category = {
   mono_data?: Mono[];
 };
 
+export type FormType = 'CREATE' | 'UPDATE';
