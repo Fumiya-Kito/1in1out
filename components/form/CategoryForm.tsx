@@ -13,7 +13,7 @@ type Options = {
 };
 
 export default function SearchPage(
-  props: { type: FormType ,data?: Mono | Category }
+  props: { type: FormType, data?: Category }
 ) {
   const iconOptions = iconFormOptions;
 
@@ -57,7 +57,6 @@ export default function SearchPage(
     });
 
     const data = res.json();
-    console.log("from client: ResData = ", data);
   };
 
   useEffect(() => setIsMounted(true), []);
@@ -71,6 +70,7 @@ export default function SearchPage(
             onChange={(value) =>
               value ? setSelectedIcon(value) : undefined
             }
+            defaultValue={{ value: props.data?.icon, label: props.data?.iconJsx }}
             className="w-64 my-2"
           />
           <div>
@@ -79,6 +79,7 @@ export default function SearchPage(
               id="name"
               placeholder="Category Name"
               aria-label="Category Name"
+              defaultValue={props.data?.name}
               ref={nameInputRef}
             />
           </div>
@@ -88,11 +89,12 @@ export default function SearchPage(
               id="upper_limit"
               placeholder="upper_limit"
               aria-label="upper_limit"
+              defaultValue={props.data?.upper_limit}
               ref={upperLimitInputRef}
             />
           </div>
           <button className="p-2 m-2 bg-cyan-500 text-white rounded-lg">
-            {props.type === "CREATE" 
+            {props.type === "CREATE"
               ? 'Register'
               : 'Update'
             }

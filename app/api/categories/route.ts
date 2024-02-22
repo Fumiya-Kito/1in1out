@@ -11,12 +11,10 @@ const getNextCategoryID = async function(db: Db) {
 };
 
 async function POST(request: Request) {
-  
   try {
     // // リクエストボディの取得
     const body = await request.json();
 
-    /** 接続はlibに移行, 毎回MonogoDbClientをインスタンス化させないため */
     const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
     const db = client.db();
     // 採番取得

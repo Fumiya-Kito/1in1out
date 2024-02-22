@@ -11,7 +11,7 @@ export default function MonoList({ data, categories }: MonoListProps) {
   return (
     <li className="list-none flex">
       {data.map((mono) => (
-        <MonoItem item={mono} categories={categories} />
+        <MonoItem key={mono._id} item={mono} categories={categories} />
       ))}
     </li>
   )

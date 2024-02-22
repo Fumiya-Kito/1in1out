@@ -6,7 +6,6 @@ async function POST(request: Request) {
     // // リクエストボディの取得
     const body = await request.json();
 
-    /** 接続はlibに移行, 毎回MonogoDbClientをインスタンス化させないため */
     const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
     const db = client.db();
     const response = await db.collection("monos").insertOne(body);

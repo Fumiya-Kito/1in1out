@@ -1,16 +1,14 @@
-import Form from '@/components/form/Form';
+import Form from '@/components/form/CategoryForm';
+import { getCategory } from '@/app/_lib/categories/getCategory';
 
-type CategoryEditProps = {
-  params: {
-    slug: number;
-  }
-}
 
-export default function CategoryEditPage({ params }: CategoryEditProps) {
+export default async function CategoryEditPage({ params }: { params: { slug: string } }) {
+  const categoryData = await getCategory(+params.slug);
+
   return (
     <section>
-      <h2>New Category Page</h2>
-      <Form type={"UPDATE"}/>
+      <h2>Category Edit Page</h2>
+      <Form type={"UPDATE"} data={categoryData}/>
     </section>
   );
 }
