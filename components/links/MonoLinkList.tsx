@@ -1,11 +1,8 @@
 import { Mono } from "@/app/type";
 import Link from "next/link";
 
-type MonoListProps = {
-  data: Mono[];
-}
 
-export default function MonoLinkList({ data }: MonoListProps) {
+export default function MonoLinkList({ data }: { data: Mono[] }) {
   return (
     <li className="list-none">
       {data.map((mono) => (

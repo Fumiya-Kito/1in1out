@@ -18,10 +18,6 @@ export default async function ExchangePage() {
     return { ...category, mono_data: monoInCategory };
   });
 
-  console.log('++++++++++++++++++++++++++++');
-  console.log(joinedDataList);
-  console.log('++++++++++++++++++++++++++++');
-
   // const DUMMY_WISH = [
   //   {
   //     _id: "1",

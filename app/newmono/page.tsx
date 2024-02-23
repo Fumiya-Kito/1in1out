@@ -16,7 +16,7 @@ type Options = {
 };
 
 export default function NewMonoPage() {
-  /** Optionを取得してこないとだめ*/
+  /**TODO: Optionを取得してこないとだめ*/
   const categoryOptions = [
     { value: 1, label: "wishlist" },
     { value: 2, label: "Category1" },
