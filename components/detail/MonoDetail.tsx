@@ -1,30 +1,18 @@
 "use client";
 
-import { Mono } from "@/app/type";
+import { Category, Mono } from "@/app/type";
 import { useState, useRef, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
-import Select from "react-select";
 import { iconFormOptions } from "../icons/icons";
+import MonoForm from "../form/MonoForm";
 
 type Options = {
   value?: number | string;
   label?: string | JSX.Element;
 };
 
-export function MonoDetail({ item }: { item: Mono }) {
+export function MonoDetail({ item, categoryList }: { item: Mono; categoryList: Category[] }) {
   const [isEdit, setIsEdit] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-  const [selectedIcon, setSelectedIcon] = useState<Options>({
-    value: undefined,
-    label: undefined,
-  });
-  const defaultIcon = iconFormOptions.find(
-    (iconObj) => iconObj.value === item.icon
-  );
-  // Refs
-  const nameInputRef = useRef<HTMLInputElement>(null);
-  const categoryIdInputRef = useRef<HTMLInputElement>(null);
-  const reasonInputRef = useRef<HTMLInputElement>(null);
 
   const editHandler = () => {
     setIsEdit((prevBool) => !prevBool);
@@ -32,8 +20,6 @@ export function MonoDetail({ item }: { item: Mono }) {
   const saveHandler = () => {
     setIsEdit((prevBool) => !prevBool);
   };
-
-  useEffect(() => setIsMounted(true));
 
   return (
     <div>
@@ -50,47 +36,7 @@ export function MonoDetail({ item }: { item: Mono }) {
           </div>
         </>
       ) : (
-        <form onSubmit={saveHandler}>
-          <>
-            <Select
-              options={iconFormOptions}
-              defaultValue={defaultIcon}
-              onChange={(value) => (value ? setSelectedIcon(value) : undefined)}
-              className="w-64 my-2"
-            />
-          </>
-          <div>
-            <input
-              type="text"
-              id="name"
-              ref={nameInputRef}
-              defaultValue={item.name}
-              className="text-black my-1"
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              id="category_id"
-              inputMode="numeric"
-              ref={categoryIdInputRef}
-              defaultValue={item.category_id}
-              className="text-black my-1"
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              id="reason"
-              ref={reasonInputRef}
-              defaultValue={item.reason}
-              className="text-black my-1"
-            />
-          </div>
-          <div>
-            <button>Save Mono</button>
-          </div>
-        </form>
+        <MonoForm type="UPDATE" data={item} categoryList={categoryList}/>
       )}
     </div>
   );

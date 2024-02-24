@@ -10,7 +10,6 @@ export default function CategoryList({ data }: CategoryListProps) {
   const wishlist = data.find((category) => category._id === 1);
   const inventory = data.filter((category) => category._id !== 1);
 
-  console.log(wishlist);
 
   return (
     <>

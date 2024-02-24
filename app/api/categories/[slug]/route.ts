@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 
 export async function GET(
   request: NextRequest,

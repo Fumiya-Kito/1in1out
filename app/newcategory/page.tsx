@@ -1,6 +1,6 @@
 import Form from "@/components/form/CategoryForm";
 
-export default function SearchPage() {
+export default function NewCategoryPage() {
   return (
     <section>
       <h2>New Category Page</h2>

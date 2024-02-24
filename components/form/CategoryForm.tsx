@@ -5,16 +5,17 @@ import Select from "react-select";
 
 import { iconFormOptions } from "../icons/icons";
 import Loading from "@/app/loading";
-import { Category, FormType, Mono } from "@/app/type";
+import { Category, FormType } from "@/app/type";
 
 type Options = {
   value?: number | string;
   label?: string | JSX.Element;
 };
 
-export default function SearchPage(
-  props: { type: FormType, data?: Category }
-) {
+export default function CategoryForm(props: {
+  type: FormType;
+  data?: Category;
+}) {
   const iconOptions = iconFormOptions;
 
   const [isMounted, setIsMounted] = useState(false);
@@ -32,11 +33,7 @@ export default function SearchPage(
     const enteredUpperLimit = upperLimitInputRef.current!.value;
 
     /* validation */
-    if (
-      !enteredName ||
-      !enteredIcon ||
-      !enteredUpperLimit
-    ) {
+    if (!enteredName || !enteredIcon || !enteredUpperLimit) {
       console.log("invalid Input");
       return;
     }
@@ -49,7 +46,7 @@ export default function SearchPage(
 
     // POST
     const res = await fetch("/api/categories", {
-      method: "POST",
+      method: props.type === "CREATE" ? "POST" : "PATCH",
       body: JSON.stringify(reqBody),
       headers: {
         "Content-Type": "application/json",
@@ -67,10 +64,11 @@ export default function SearchPage(
         <>
           <Select
             options={iconOptions}
-            onChange={(value) =>
-              value ? setSelectedIcon(value) : undefined
-            }
-            defaultValue={{ value: props.data?.icon, label: props.data?.iconJsx }}
+            onChange={(value) => (value ? setSelectedIcon(value) : undefined)}
+            defaultValue={{
+              value: props.data?.icon,
+              label: props.data?.iconJsx,
+            }}
             className="w-64 my-2"
           />
           <div>
@@ -94,13 +92,12 @@ export default function SearchPage(
             />
           </div>
           <button className="p-2 m-2 bg-cyan-500 text-white rounded-lg">
-            {props.type === "CREATE"
-              ? 'Register'
-              : 'Update'
-            }
+            {props.type === "CREATE" ? "Register" : "Update"}
           </button>
         </>
-      ) : <Loading />}
+      ) : (
+        <Loading />
+      )}
     </form>
   );
 }

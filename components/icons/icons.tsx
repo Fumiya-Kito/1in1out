@@ -20,8 +20,5 @@ export function getIconByString(target: string) {
     { key:"pibow", jsx: <PiBowlFood /> },
   ]
 
-  console.log(target);
-  console.log(allIcons.find(icon => icon.key === target));
-
   return allIcons.find(icon => icon.key === target)?.jsx;
 }
