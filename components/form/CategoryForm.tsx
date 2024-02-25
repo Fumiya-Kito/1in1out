@@ -44,16 +44,18 @@ export default function CategoryForm(props: {
       upper_limit: +enteredUpperLimit, // :number
     };
 
-    // POST
-    const res = await fetch("/api/categories", {
-      method: props.type === "CREATE" ? "POST" : "PATCH",
+    // API
+    const endpoint = props.type === "CREATE" ? "/api/categories" : `/api/categories/${props.data?._id}`;
+    const httpMethod = props.type === "CREATE" ? "POST" : "PATCH";
+    const res = await fetch(endpoint, {
+      method: httpMethod,
       body: JSON.stringify(reqBody),
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    const data = res.json();
+    const resData = res.json();
   };
 
   useEffect(() => setIsMounted(true), []);

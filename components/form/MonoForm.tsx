@@ -55,16 +55,19 @@ export default function MonoForm(props: {
       name: enteredName,
     };
 
-    // POST
-    const res = await fetch("/api/monos", {
-      method: props.type === "CREATE" ? "POST" : "PATCH",
+    /** TODO: libに持って行く、初期値設定reactselect, cache, 完了通知 */
+    // API
+    const endpoint = props.type === "CREATE" ? "/api/monos" : `/api/monos/${props.data?._id}`;
+    const httpMethod = props.type === "CREATE" ? "POST" : "PATCH";
+    const res = await fetch(endpoint, {
+      method: httpMethod,
       body: JSON.stringify(reqBody),
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    const data = res.json();
+    const resData = await res.json();
   };
 
   useEffect(() => setIsMounted(true), []);
@@ -92,10 +95,10 @@ export default function MonoForm(props: {
             <Select
               options={iconFormOptions}
               onChange={(value) => (value ? setSelectedIcon(value) : undefined)}
-              defaultValue={{
-                value: props.data?.icon,
-                label: props.data?.iconJsx,
-              }}
+              // defaultValue={{
+              //   value: props.data?.icon,
+              //   label: props.data?.iconJsx,
+              // }}
               className="w-64 my-2 text-black"
               />
             <input
@@ -108,7 +111,7 @@ export default function MonoForm(props: {
               className="text-black"
             />
             <button className="p-2 m-2 bg-cyan-500 text-white rounded-lg">
-              {props.type === "CREATE" ? "Register" : "UPDATE"}
+              {props.type === "CREATE" ? "REGISTER" : "UPDATE"}
             </button>
           </>
         ) : (

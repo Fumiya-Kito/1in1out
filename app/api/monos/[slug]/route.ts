@@ -22,3 +22,28 @@ export async function GET(
     return new NextResponse("Error", { status: 500 });
   }
 }
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { slug: string } }
+) {
+  try {
+    // categoryIdを取得
+    const monoId = params.slug;
+
+    // リクエストボディの取得
+    const body = await request.json();
+
+    const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
+    const db = client.db();
+    const response = await db
+      .collection("monos")
+      .updateOne({ _id: new ObjectId(monoId) }, { $set: { ...body } });
+
+    client.close();
+    return NextResponse.json(response, { status: 200 });
+  } catch (err) {
+    console.error(err);
+    return new NextResponse("Error", { status: 500 });
+  }
+}
