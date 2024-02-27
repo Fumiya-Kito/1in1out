@@ -9,7 +9,7 @@ type MonoProps = {
 };
 
 export default function MonoItem({ item, categories }: MonoProps) {
-  const [categoryId, setCategoryId] = useState<number>(item.category_id);
+  const [categoryId, setCategoryId] = useState<number | undefined>(item.category_id);
   const clickHandler = (id: number) => {
     setCategoryId((prevId) => id);
   };
