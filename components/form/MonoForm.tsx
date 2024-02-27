@@ -7,6 +7,7 @@ import { iconFormOptions } from "../icons/icons";
 import { Category, FormType, Mono } from "@/app/type";
 import Loading from "@/app/loading";
 import Modal from "../modals/Modal";
+import { useRouter } from "next/navigation";
 
 type Options = {
   value?: number | string;
@@ -23,6 +24,7 @@ export default function MonoForm(props: {
     return { value: category._id, label: category.name };
   });
 
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -74,6 +76,7 @@ export default function MonoForm(props: {
     });
 
     const resData = await res.json();
+    router.refresh();
     setSubmitLoading(false);
   };
 
