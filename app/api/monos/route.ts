@@ -31,8 +31,6 @@ async function GET(request: NextRequest) {
     const findCondition = categoryId ? { "category_id": +categoryId } : {};
 
     const response = await db.collection("monos").find(findCondition).toArray();
-    console.log('con==================', findCondition);
-    console.log('res==================', response);
     client.close();
     return NextResponse.json(response, {status: 200 });
   } catch (err) {
