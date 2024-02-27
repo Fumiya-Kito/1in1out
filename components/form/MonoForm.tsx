@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { FiEdit } from "react-icons/fi";
+
 import Select from "react-select";
 import { iconFormOptions } from "../icons/icons";
 
@@ -25,7 +27,7 @@ export default function MonoForm(props: {
   });
 
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Options>({
@@ -44,7 +46,6 @@ export default function MonoForm(props: {
     const enteredCategoryId = selectedCategory.value;
     const enteredIcon = selectedIcon.value;
     const enteredName = nameInputRef.current!.value;
-
 
     /* validation */
     if (
@@ -77,6 +78,7 @@ export default function MonoForm(props: {
 
     const resData = await res.json();
     router.refresh();
+    setIsOpen((prevState) => !prevState);
     setSubmitLoading(false);
   };
 
@@ -131,17 +133,25 @@ export default function MonoForm(props: {
           {isMounted ? (
             <Modal
               disabled={submitLoading}
-              isOpen={true}
+              isOpen={isOpen}
               title={props.type === "CREATE" ? "モノ新規作成" : "モノ編集"}
               label={props.type === "CREATE" ? "REGISTER" : "UPDATE"}
-              onClose={() => {setIsOpen(prevState => !prevState)}}
+              onClose={() => {
+                setIsOpen((prevState) => !prevState);
+              }}
               onSubmit={submitHandler}
               body={bodyContent}
               // footer={footerContent}
-            />  
-          ) : <Loading />}
+            />
+          ) : (
+            <Loading />
+          )}
         </>
-      ) : undefined}
+      ) : (
+        <button className="p-1 m-1 bg-cyan-500 text-black rounded-lg" onClick={() => setIsOpen((prevState) => !prevState)}>
+          {props.type === "CREATE" ? "モノ新規作成" : <FiEdit />}
+        </button>
+      )}
     </>
     // <form onSubmit={registrationHandler}>
     //   <div>
