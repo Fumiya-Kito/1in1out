@@ -1,17 +1,17 @@
 "use client";
 
-import { useCallback } from "react";
+import Loading from "@/app/loading";
+import { useCallback, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
 type ModalProps = {
   isOpen?: boolean;
   onClose: () => void;
-  onSubmit: () => Promise<void>;
+  onSubmit: () => Promise<boolean>;
   title?: string;
   body?: React.ReactElement;
   footer?: React.ReactElement;
   label: string;
-  disabled?: boolean;
 };
 
 export default function Modal({
@@ -22,29 +22,33 @@ export default function Modal({
   body,
   footer,
   label,
-  disabled,
 }: ModalProps) {
+  const [loading, setLoading] = useState(false);
+
   // 閉じる
   const handleClose = useCallback(() => {
-    if (disabled) {
+    console.log("from client side, handleClose", loading);
+    if (loading) {
       return;
     }
     onClose();
-  }, [onClose, disabled]);
+  }, [onClose, loading]);
 
   // メインボタンのアクション
-  const handleSubmit = useCallback(() => {
-    console.log("from client side, handleSubmit", disabled)
-    if (disabled) {
+  const handleSubmit = useCallback(async () => {
+    console.log("from client side, handleSubmit", loading);
+    if (loading) {
       return;
     }
-    onSubmit();
-  }, [onSubmit, disabled]);
-  
+    setLoading(true);
+    const isSuccessful = await onSubmit();
+    if (!isSuccessful) setLoading(false);
+  }, [onSubmit, loading]);
+
   if (!isOpen) {
     return undefined;
   }
-  
+
   return (
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800/50">
@@ -71,9 +75,19 @@ export default function Modal({
                 {/** ボタン */}
                 <div className="flex w-full flex-row items-center gap-4">
                   {/** メインボタン */}
-                  <button onClick={handleSubmit} className="p-2 m-2 bg-cyan-500 text-white rounded-lg">
-                    {label}
-                  </button>
+                  <div className="p-0 h-16">
+                    {!loading ? (
+                      <button
+                        disabled={loading}
+                        onClick={handleSubmit}
+                        className="p-2 m-2 bg-cyan-500 text-white rounded-lg"
+                      >
+                        {label}
+                      </button>
+                    ) : (
+                      <Loading />
+                    )}
+                  </div>
                 </div>
                 {/** フッター */}
                 {footer}
