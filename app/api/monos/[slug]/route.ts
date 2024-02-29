@@ -47,3 +47,25 @@ export async function PATCH(
     return new NextResponse("Error", { status: 500 });
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { slug: string } }
+) {
+  try {
+    // monoIdを取得
+    const monoId = params.slug;
+
+    const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
+    const db = client.db();
+    const response = await db
+      .collection("monos")
+      .deleteOne({ _id: new ObjectId(monoId) });
+
+    client.close();
+    return NextResponse.json(response, { status: 200 });
+  } catch (err) {
+    console.error(err);
+    return new NextResponse("Error", { status: 500 });
+  }
+}

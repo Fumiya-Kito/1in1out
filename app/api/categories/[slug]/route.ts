@@ -46,3 +46,27 @@ export async function PATCH(
     return new NextResponse("Error", { status: 500 });
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { slug: string } }
+) {
+  try {
+    // categoryIdを取得
+    const categoryId = params.slug;
+
+    // TODO カスケード削除しないといけない
+
+    const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
+    const db = client.db();
+    const response = await db
+      .collection("categories")
+      .deleteOne({ _id: +categoryId as any });
+
+    client.close();
+    return NextResponse.json(response, { status: 200 });
+  } catch (err) {
+    console.error(err);
+    return new NextResponse("Error", { status: 500 });
+  }
+}

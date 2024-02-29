@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { iconFormOptions } from "../icons/icons";
 import MonoForm from "../form/MonoForm";
+import DeleteForm from "../form/DeleteForm";
 
 type Options = {
   value?: number | string;
@@ -18,11 +19,6 @@ export function MonoDetail({
   item: Mono;
   categoryList: Category[];
 }) {
-  const [isEdit, setIsEdit] = useState(false);
-
-  const editHandler = () => {
-    setIsEdit((prevBool) => !prevBool);
-  };
 
   return (
     <>
@@ -34,6 +30,7 @@ export function MonoDetail({
       </div>
 
       <MonoForm type="UPDATE" data={item} categoryList={categoryList} />
+      <DeleteForm model={item} pk={item._id} />
     </>
   );
 }
