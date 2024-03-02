@@ -12,7 +12,7 @@ export type Category = {
   icon: string; 
   name: string; 
   iconJsx?: JSX.Element;
-  upper_limit?: number;
+  upper_limit: number;
   mono_data?: Mono[];
 };
 

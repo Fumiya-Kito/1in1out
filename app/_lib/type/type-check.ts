@@ -15,6 +15,6 @@ export function isCategory(obj: any) {
     '_id' in obj && 
     'icon' in obj &&
     'name' in obj &&
-    (obj.upper_limit === undefined || typeof obj.upper_limit === 'number')
+    'upper_limit' in obj
   );
 }
