@@ -1,8 +1,4 @@
-import CategoryList from "@/components/dragdrop/CategoryList";
-import { HiOutlineComputerDesktop } from "react-icons/hi2";
-import { HiOutlineBattery0 } from "react-icons/hi2";
-import { HiOutlineCake } from "react-icons/hi2";
-import { PiBowlFood } from "react-icons/pi";
+import CategoryList from "@/app/_features/exchange/CategoryList";
 import getAllCategories from "./_lib/categories/getAllCategories";
 import { Category, Mono } from "./type";
 import getMonosByCategory from "./_lib/monos/getMonosByCategory";

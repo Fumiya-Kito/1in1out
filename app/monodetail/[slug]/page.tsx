@@ -1,4 +1,4 @@
-import { MonoDetail } from "@/components/detail/MonoDetail";
+import { MonoDetail } from "@/app/_features/monodetail/MonoDetail";
 import { getMono } from "@/app/_lib/monos/getMono";
 import getAllCategories from "@/app/_lib/categories/getAllCategories";
 

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Mono } from "@/app/type";
 import MonoSearchForm from "../form/MonoSearchForm";
 
-export default function MonoLinkList({ data }: { data: Mono[] }) {
+export default function FilteredMonoLinkList({ data }: { data: Mono[] }) {
   const [filteredData, setFilteredData] = useState<Mono[]>(data);
 
   const searchHandler: (inputValue: string) => void = (inputValue) => {

@@ -1,11 +1,8 @@
 "use client";
 
 import { Category, Mono } from "@/app/type";
-import { useState, useRef, useEffect } from "react";
-import { FiEdit } from "react-icons/fi";
-import { iconFormOptions } from "../icons/icons";
-import MonoForm from "../form/MonoForm";
-import DeleteForm from "../form/DeleteForm";
+import MonoForm from "@/components/form/MonoForm";
+import DeleteForm from "@/components/form/DeleteForm";
 
 type Options = {
   value?: number | string;
