@@ -17,45 +17,39 @@ function Menu() {
 
   return (
     <div>
-      {isHome ? (
-        <>
-          <div className="cursor-pointer" onClick={toggleOpen}>
-            Menu
-          </div>
-
-          {isOpen && (
-            <div>
-              <div className="cursor-pointer">
-                <MenuItem
-                  label="exchange"
-                  onClick={() => {
-                    setIsOpen(false);
-                    router.push("/");
-                  }}
-                />
-                <MenuItem
-                  label="inventory"
-                  onClick={() => {
-                    setIsOpen(false);
-                    router.push("/categorylist");
-                  }}
-                />
-                <MenuItem
-                  label="wishlist"
-                  onClick={() => {
-                    setIsOpen(false);
-                    router.push("/monolist/1_wishlist");
-                  }}
-                />
-              </div>
-            </div>
-          )}
-        </>
-      ) : (
-        <div>
-          <Link href="/">Back to Home</Link>
+      <>
+        <div className="cursor-pointer" onClick={toggleOpen}>
+          Menu
         </div>
-      )}
+
+        {isOpen && (
+          <div>
+            <div className="cursor-pointer">
+              <MenuItem
+                label="exchange"
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push("/");
+                }}
+              />
+              <MenuItem
+                label="inventory"
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push("/categorylist");
+                }}
+              />
+              <MenuItem
+                label="wishlist"
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push("/monolist/1_wishlist");
+                }}
+              />
+            </div>
+          </div>
+        )}
+      </>
     </div>
   );
 }
