@@ -54,6 +54,7 @@ export default function DeleteForm<T extends { name: string }>({
   const bodyContent = (
     <>
       <p>{recordName}を削除してもよろしいですか?</p>
+      {isCategory(model) && <p>※カテゴリーが{recordName}であるモノはすべて削除されます</p>}
     </>
   );
 

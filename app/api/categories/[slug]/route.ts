@@ -55,10 +55,11 @@ export async function DELETE(
     // categoryIdを取得
     const categoryId = params.slug;
 
-    // TODO カスケード削除しないといけない
-
+    
     const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
     const db = client.db();
+    // カスケード削除
+    const delManyMonos = await db.collection("monos").deleteMany({ category_id: +categoryId });
     const response = await db
       .collection("categories")
       .deleteOne({ _id: +categoryId as any });
