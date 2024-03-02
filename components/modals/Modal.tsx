@@ -27,7 +27,6 @@ export default function Modal({
 
   // 閉じる
   const handleClose = useCallback(() => {
-    console.log("from client side, handleClose", loading);
     if (loading) {
       return;
     }
@@ -36,7 +35,6 @@ export default function Modal({
 
   // メインボタンのアクション
   const handleSubmit = useCallback(async () => {
-    console.log("from client side, handleSubmit", loading);
     if (loading) {
       return;
     }
