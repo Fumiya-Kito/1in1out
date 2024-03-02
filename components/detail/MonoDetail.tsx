@@ -29,7 +29,7 @@ export function MonoDetail({
         <p>{item.reason}</p>
       </div>
 
-      <MonoForm type="UPDATE" data={item} categoryList={categoryList} />
+      <MonoForm type="UPDATE" data={item} categoryList={categoryList} categoryId={item.category_id.toString()}/>
       <DeleteForm model={item} pk={item._id} />
     </>
   );

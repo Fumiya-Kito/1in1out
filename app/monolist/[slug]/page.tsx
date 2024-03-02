@@ -25,7 +25,7 @@ export default async function InventoryPage(
     <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex bg-gray-900">
       <MonoLinkList data={monoList} />
     </div>
-    <MonoForm type="CREATE" categoryList={allCategoryList} />
+    <MonoForm type="CREATE" categoryList={allCategoryList} categoryId={categoryId} />
     </>
   );
 }

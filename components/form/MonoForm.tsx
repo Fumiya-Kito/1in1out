@@ -16,13 +16,18 @@ type Options = {
   label?: string | JSX.Element;
 };
 
-export default function MonoForm(props: {
+export default function MonoForm({
+  type,
+  categoryList,
+  data,
+  categoryId,
+}: {
   type: FormType;
   categoryList: Category[];
   data?: Mono;
-  categoryIcon?: string;
+  categoryId: string;
 }) {
-  const categoryOptions: Options[] = props.categoryList.map((category) => {
+  const categoryOptions: Options[] = categoryList.map((category) => {
     return { value: category._id, label: category.name };
   });
 
@@ -32,15 +37,15 @@ export default function MonoForm(props: {
   const [isMounted, setIsMounted] = useState(false);
 
   const defaultCategory = categoryOptions.find(
-    (category) => category.value === props.data?.category_id
+    (category) => category.value === +categoryId
   );
   const [selectedCategory, setSelectedCategory] = useState<Options>({
     value: defaultCategory?.value,
     label: defaultCategory?.label,
   });
   const [selectedIcon, setSelectedIcon] = useState<Options>({
-    value: props.data?.icon,
-    label: props.data?.iconJsx,
+    value: data?.icon,
+    label: data?.iconJsx,
   });
   const nameInputRef = useRef<HTMLInputElement>(null);
 
@@ -66,11 +71,10 @@ export default function MonoForm(props: {
       name: enteredName,
     };
 
-    /** TODO: libに持って行く、初期値設定reactselect, cache, 完了通知 */
     // API
     const endpoint =
-      props.type === "CREATE" ? "/api/monos" : `/api/monos/${props.data?._id}`;
-    const httpMethod = props.type === "CREATE" ? "POST" : "PATCH";
+      type === "CREATE" ? "/api/monos" : `/api/monos/${data?._id}`;
+    const httpMethod = type === "CREATE" ? "POST" : "PATCH";
     const res = await fetch(endpoint, {
       method: httpMethod,
       body: JSON.stringify(reqBody),
@@ -105,8 +109,8 @@ export default function MonoForm(props: {
         options={iconFormOptions}
         onChange={(value) => (value ? setSelectedIcon(value) : undefined)}
         defaultValue={{
-          value: props.data?.icon,
-          label: props.data?.iconJsx,
+          value: data?.icon,
+          label: data?.iconJsx,
         }}
         className="w-64 my-1 text-black"
       />
@@ -119,7 +123,7 @@ export default function MonoForm(props: {
           placeholder="Mono Name"
           aria-label="Mono Name"
           ref={nameInputRef}
-          defaultValue={props.data?.name}
+          defaultValue={data?.name}
           className="p-2 my-1 text-black border w-64 rounded-md"
         />
       </div>
@@ -135,9 +139,9 @@ export default function MonoForm(props: {
         <>
           {isMounted ? (
             <Modal
-            isOpen={isOpen}
-            title={props.type === "CREATE" ? "モノ新規作成" : "モノ編集"}
-              label={props.type === "CREATE" ? "REGISTER" : "UPDATE"}
+              isOpen={isOpen}
+              title={type === "CREATE" ? "モノ新規作成" : "モノ編集"}
+              label={type === "CREATE" ? "REGISTER" : "UPDATE"}
               onClose={() => {
                 setIsOpen((prevState) => !prevState);
               }}
@@ -153,7 +157,7 @@ export default function MonoForm(props: {
           className="p-1 m-1 bg-cyan-500 text-black rounded-lg"
           onClick={() => setIsOpen((prevState) => !prevState)}
         >
-          {props.type === "CREATE" ? "モノ新規作成" : <FiEdit />}
+          {type === "CREATE" ? "モノ新規作成" : <FiEdit />}
         </button>
       )}
     </>
