@@ -9,9 +9,13 @@ export default async function CategoryListPage() {
   const categories = await getAllCategories();
 
   return (
-    <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex bg-gray-900">
-      <CategoryLinkList data={categories} />
-      <CategoryForm type="CREATE" />
+    <div>
+      <div className="z-10 w-full items-center justify-between font-mono text-sm">
+        <CategoryLinkList data={categories} />
+      </div>
+      <div className="fixed right-6 bottom-6 shadow-md">
+        <CategoryForm type="CREATE" />
+      </div>
     </div>
   );
 }

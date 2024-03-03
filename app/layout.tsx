@@ -19,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <Header />
-        <main className="px-4">
-          {children}
-        </main>
+        <section id="screen" className='relative h-screen'>
+          <Header />
+          <main className="lg:px-16 lg:py-4">
+            {children}
+          </main>
+        </section>
       </body>
     </html>
   )

@@ -12,12 +12,12 @@ export const iconFormOptions = [
 // export function getIconFormList() {
 // }
 
-export function getIconByString(target: string) {
+export function getIconByString(target: string, size?: number) {
   const allIcons = [
-    { key: "battery", jsx: <HiOutlineBattery0 /> },
-    { key: "desktop", jsx: <HiOutlineComputerDesktop /> },
-    { key: "cake", jsx: <HiOutlineCake /> },
-    { key:"pibow", jsx: <PiBowlFood /> },
+    { key: "battery", jsx: <HiOutlineBattery0 size={size}/> },
+    { key: "desktop", jsx: <HiOutlineComputerDesktop size={size}/> },
+    { key: "cake", jsx: <HiOutlineCake size={size}/> },
+    { key:"pibow", jsx: <PiBowlFood size={size}/> },
   ]
 
   return allIcons.find(icon => icon.key === target)?.jsx;

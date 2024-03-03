@@ -8,6 +8,7 @@ import Loading from "@/app/loading";
 import { Category, FormType } from "@/app/type";
 import Modal from "../modals/Modal";
 import { FiEdit } from "react-icons/fi";
+import { GoPlusCircle } from "react-icons/go";
 
 type Options = {
   value?: number | string;
@@ -33,12 +34,16 @@ export default function CategoryForm(props: {
 
   const submitHandler = async () => {
     const enteredIcon = selectedIcon.value;
-    const enteredName = nameInputRef.current!.value;
-    const enteredUpperLimit = upperLimitInputRef.current!.value;
+    const enteredName = nameInputRef.current?.value;
+    const enteredUpperLimit = upperLimitInputRef.current?.value;
 
     /* validation */
     if (!enteredName || !enteredIcon || !enteredUpperLimit) {
       console.log("invalid Input");
+      return false;
+    }
+    if (+enteredUpperLimit > 999) {
+      upperLimitInputRef.current.value = "999";
       return false;
     }
 
@@ -66,7 +71,7 @@ export default function CategoryForm(props: {
     startTransition(() => {
       router.refresh();
       setIsOpen((prevState) => !prevState);
-    })
+    });
     return true;
   };
 
@@ -91,6 +96,7 @@ export default function CategoryForm(props: {
           aria-label="Category Name"
           defaultValue={props.data?.name}
           ref={nameInputRef}
+          maxLength={25}
         />
       </div>
       <div>
@@ -101,6 +107,8 @@ export default function CategoryForm(props: {
           aria-label="upper_limit"
           defaultValue={props.data?.upper_limit}
           ref={upperLimitInputRef}
+          max={999}
+          maxLength={3}
         />
       </div>
     </>
@@ -129,10 +137,19 @@ export default function CategoryForm(props: {
         </>
       ) : (
         <button
-          className="p-1 m-1 bg-cyan-500 text-black rounded-lg"
+          className=""
           onClick={() => setIsOpen((prevState) => !prevState)}
         >
-          {props.type === "CREATE" ? "カテゴリ新規作成" : <FiEdit />}
+          {props.type === "CREATE" ? (
+            <div className="flex sm:w-48 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
+              <div　className="flex-none sm:w-8">
+              <GoPlusCircle size={24} />
+              </div>
+              <div className="flex-auto text-center hidden sm:block">New Category</div>
+            </div>
+          ) : (
+            <FiEdit />
+          )}
         </button>
       )}
     </>
