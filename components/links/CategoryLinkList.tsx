@@ -10,9 +10,9 @@ export default function CategoryLinkList({ data }: { data: Category[] }) {
     <li className="list-none grid grid-cols-1 lg:grid-cols-2 lg:gap-4">
       {data.map((category) => (
         <ul key={category._id}>
-            <Link href={`/monolist/${category._id}_${category.name}`}>
-              <CategoryCard model={category}/>
-            </Link>
+          <Link href={`/monolist/${category._id}_${category.name}`}>
+            <CategoryCard model={category} />
+          </Link>
         </ul>
       ))}
     </li>

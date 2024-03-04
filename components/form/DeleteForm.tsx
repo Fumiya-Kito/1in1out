@@ -54,7 +54,9 @@ export default function DeleteForm<T extends { name: string }>({
   const bodyContent = (
     <>
       <p>{recordName}を削除してもよろしいですか?</p>
-      {isCategory(model) && <p>※カテゴリーが{recordName}であるモノはすべて削除されます</p>}
+      {isCategory(model) && (
+        <p>※カテゴリーが{recordName}であるモノはすべて削除されます</p>
+      )}
     </>
   );
 
@@ -72,11 +74,10 @@ export default function DeleteForm<T extends { name: string }>({
           body={bodyContent}
         />
       ) : (
-        <button
-          className="p-1 m-1 bg-cyan-500 text-black rounded-lg"
-          onClick={() => setIsOpen((prevState) => !prevState)}
-        >
-          <RiDeleteBin6Line />
+        <button onClick={() => setIsOpen((prevState) => !prevState)}>
+          <div className="p-2 m-0.5 hover:bg-red-700 hover:opacity-90 rounded-lg">
+            <RiDeleteBin6Line size={18} />
+          </div>
         </button>
       )}
     </>

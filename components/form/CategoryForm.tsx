@@ -79,6 +79,7 @@ export default function CategoryForm(props: {
 
   const bodyContent = (
     <>
+      <label>Category Icon</label>
       <Select
         options={iconOptions}
         onChange={(value) => (value ? setSelectedIcon(value) : undefined)}
@@ -88,27 +89,33 @@ export default function CategoryForm(props: {
         }}
         className="w-64 my-2"
       />
+
+      <label>Category Name</label>
       <div>
         <input
           type="text"
           id="name"
-          placeholder="Category Name"
+          placeholder="e.g. Cloth"
           aria-label="Category Name"
           defaultValue={props.data?.name}
           ref={nameInputRef}
           maxLength={25}
+          className="p-2 my-1 text-black border w-64 rounded-md"
         />
       </div>
+
+      <label>Upper Limit</label>
       <div>
         <input
           type="number"
           id="upper_limit"
-          placeholder="upper_limit"
+          placeholder="12"
           aria-label="upper_limit"
           defaultValue={props.data?.upper_limit}
           ref={upperLimitInputRef}
           max={999}
           maxLength={3}
+          className="p-2 my-1 text-black border w-64 rounded-md"
         />
       </div>
     </>
@@ -136,19 +143,20 @@ export default function CategoryForm(props: {
           )}
         </>
       ) : (
-        <button
-          className=""
-          onClick={() => setIsOpen((prevState) => !prevState)}
-        >
+        <button onClick={() => setIsOpen((prevState) => !prevState)}>
           {props.type === "CREATE" ? (
             <div className="flex sm:w-48 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
-              <div　className="flex-none sm:w-8">
-              <GoPlusCircle size={24} />
+              <div className="flex-none sm:w-8">
+                <GoPlusCircle size={24} />
               </div>
-              <div className="flex-auto text-center hidden sm:block">New Category</div>
+              <div className="flex-auto text-center hidden sm:block">
+                New Category
+              </div>
             </div>
           ) : (
-            <FiEdit />
+            <div className="p-2 my-0.5 hover:bg-green-700 hover:opacity-90 rounded-lg">
+              <FiEdit size={18} />
+            </div>
           )}
         </button>
       )}

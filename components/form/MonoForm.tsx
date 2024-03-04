@@ -5,6 +5,7 @@ import { FiEdit } from "react-icons/fi";
 
 import Select from "react-select";
 import { iconFormOptions } from "../icons/icons";
+import { GoPlusCircle } from "react-icons/go";
 
 import { Category, FormType, Mono } from "@/app/type";
 import Loading from "@/app/loading";
@@ -153,11 +154,19 @@ export default function MonoForm({
           )}
         </>
       ) : (
-        <button
-          className="p-1 m-1 bg-cyan-500 text-black rounded-lg"
-          onClick={() => setIsOpen((prevState) => !prevState)}
-        >
-          {type === "CREATE" ? "モノ新規作成" : <FiEdit />}
+        <button onClick={() => setIsOpen((prevState) => !prevState)}>
+          {type === "CREATE" ? (
+            <div className="flex sm:w-48 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
+              <div className="flex-none sm:w-8">
+                <GoPlusCircle size={24} />
+              </div>
+              <div className="flex-auto text-center hidden sm:block">
+                New Mono
+              </div>
+            </div>
+          ) : (
+            <FiEdit />
+          )}
         </button>
       )}
     </>

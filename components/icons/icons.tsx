@@ -9,8 +9,6 @@ export const iconFormOptions = [
   { value: "cake", label: <HiOutlineCake color={"#000"} /> },
   { value: "pibow", label: <PiBowlFood color={"#000"} /> },
 ];
-// export function getIconFormList() {
-// }
 
 export function getIconByString(target: string, size?: number) {
   const allIcons = [

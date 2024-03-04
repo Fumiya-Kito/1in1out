@@ -6,7 +6,7 @@ export default function CategoryCard({model}: {model: Category}) {
   const existingMonoNumber = model.mono_data ? model.mono_data.length: 0;
   // const displayName = model.name.length > 20 ? model.name.slice(0, 20)+'...' : model.name
   return (
-    <div className="flex items-center p-2 bg-sky-950 hover:bg-sky-900 lg:rounded-lg">
+    <div className="flex items-center px-2 py-3 bg-sky-950 hover:bg-sky-900 lg:rounded-lg">
       <div className="flex-none w-10">
         {model.iconJsx}
       </div>
