@@ -49,12 +49,14 @@ export default function MonoForm({
     label: data?.iconJsx,
   });
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const reasonInputRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = async () => {
     // event.preventDefault();
     const enteredCategoryId = selectedCategory.value;
     const enteredIcon = selectedIcon.value;
     const enteredName = nameInputRef.current!.value;
+    const enteredReason = reasonInputRef.current!.value;
 
     /* validation */
     if (
@@ -70,6 +72,7 @@ export default function MonoForm({
       category_id: enteredCategoryId,
       icon: enteredIcon,
       name: enteredName,
+      reason: enteredReason,
     };
 
     // API
@@ -121,11 +124,24 @@ export default function MonoForm({
         <input
           type="text"
           id="name"
-          placeholder="Mono Name"
+          placeholder="T-shirt"
           aria-label="Mono Name"
           ref={nameInputRef}
           defaultValue={data?.name}
           className="p-2 my-1 text-black border w-64 rounded-md"
+        />
+      </div>
+
+      <label>Reasons to Own</label>
+      <div>
+        <input
+          type="text"
+          id="reason"
+          placeholder="Everyday wear"
+          aria-label="reason"
+          ref={reasonInputRef}
+          defaultValue={data?.reason}
+          className="p-2 my-1 text-black border w-4/5 min-w-64 rounded-md"
         />
       </div>
     </>
@@ -165,7 +181,9 @@ export default function MonoForm({
               </div>
             </div>
           ) : (
-            <FiEdit />
+            <div className="p-2 my-0.5 hover:bg-green-700 hover:opacity-90 rounded-lg">
+              <FiEdit size={18} />
+            </div>
           )}
         </button>
       )}

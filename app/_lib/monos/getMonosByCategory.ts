@@ -17,7 +17,7 @@ export default async function getMonosByCategory(
   const monoListWithIcon = data.map((mono) => {
     return {
       ...mono,
-      iconJsx: getIconByString(mono.icon),
+      iconJsx: getIconByString(mono.icon, 26),
     };
   });
 

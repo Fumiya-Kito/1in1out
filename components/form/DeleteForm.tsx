@@ -10,9 +10,11 @@ import { useRouter } from "next/navigation";
 export default function DeleteForm<T extends { name: string }>({
   model,
   pk,
+  isBack = true,
 }: {
   model: T;
   pk: string;
+  isBack?: boolean;
 }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -34,7 +36,7 @@ export default function DeleteForm<T extends { name: string }>({
 
     startTransition(() => {
       setIsOpen((prevState) => !prevState);
-      router.back();
+      if (isBack) router.back();
       router.refresh();
     });
 

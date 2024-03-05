@@ -17,11 +17,13 @@ export default async function InventoryPage({
   const allCategoryList = await getAllCategories();
   const pageCategory = allCategoryList.find((ctg) => ctg._id === +categoryId)!;
 
+  const formProps = {categoryId: pageCategory._id.toString(), categoryList: allCategoryList };
+
   return (
     <>
       <section
         id="page-header"
-        className="flex items-center lg:mb-4 box-border border-b-2 border-white"
+        className="flex items-center lg:mb-4 box-border border-b border-white"
       >
         <div className="px-2">
           <h1 className="sm:text-lg">{pageCategory?.name.toUpperCase()}</h1>
@@ -35,7 +37,7 @@ export default async function InventoryPage({
         id="mono-list"
         className="z-10 w-full items-center justify-between font-mono text-sm"
       >
-        <MonoLinkList data={monoList} />
+        <MonoLinkList data={monoList} formProps={formProps}/>
       </section>
       <div className="fixed right-6 bottom-6 shadow-md">
         <MonoForm
