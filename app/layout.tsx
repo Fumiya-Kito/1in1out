@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <section id="screen" className='relative h-screen'>
           <Header />
-          <main className="lg:px-16 lg:py-4">
+          <main className="h-5/6 lg:px-16 lg:py-4">
             {children}
           </main>
         </section>

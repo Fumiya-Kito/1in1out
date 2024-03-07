@@ -1,9 +1,10 @@
 export type Mono = {
   _id: string;
   category_id: number;
+  category_name?: string;
+  name: string;
   icon: string;
   iconJsx?: JSX.Element;
-  name: string;
   reason?: string;
 };
 

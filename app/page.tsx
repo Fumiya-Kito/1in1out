@@ -2,6 +2,7 @@ import CategoryList from "@/app/_features/exchange/CategoryList";
 import getAllCategories from "./_lib/categories/getAllCategories";
 import { Category, Mono } from "./type";
 import getMonosByCategory from "./_lib/monos/getMonosByCategory";
+import ExchangeBord from "./_features/exchange/ExchangeBord";
 
 export default async function ExchangePage() {
   const allCategoryList: Category[] = await getAllCategories();
@@ -18,8 +19,8 @@ export default async function ExchangePage() {
 
   return (
     <>
-      <h1>This is Exchange Page</h1>
-      <CategoryList data={joinedDataList} />
+      <ExchangeBord allMonoList={allMonoList} allCategoryList={allCategoryList} />
+      {/* <CategoryList data={joinedDataList} /> */}
     </>
   );
 }
