@@ -4,6 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useCallback, useState } from "react";
 import MenuItem from "./MenuItem";
 import Link from "next/link";
+import { LuMenu } from "react-icons/lu";
 
 function Menu() {
   const pathname = usePathname();
@@ -19,7 +20,7 @@ function Menu() {
     <div>
       <>
         <div className="cursor-pointer" onClick={toggleOpen}>
-          Menu
+          <LuMenu size={20}/>
         </div>
 
         {isOpen && (

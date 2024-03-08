@@ -4,11 +4,11 @@ import { CiSearch } from "react-icons/ci";
 
 function Header() {
   return (
-    <header className="p-6 bg-gray-800">
+    <header className="flex justify-between p-3 bg-neutral-800">
       <Menu />
 
       <div>
-        <Link href="/search"><CiSearch /></Link>
+        <Link href="/search"><CiSearch size={20}/></Link>
       </div>
     </header>
   );
