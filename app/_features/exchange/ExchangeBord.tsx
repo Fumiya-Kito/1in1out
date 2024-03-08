@@ -3,7 +3,7 @@
 import { Category, Mono } from "@/app/type";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { LuRefreshCw, LuRefreshCwOff } from "react-icons/lu";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export default function ExchangeBord({
   allMonoList,
@@ -61,15 +61,61 @@ function CategoryColumn({
   };
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    // highlightIndicator(e);
+    highlightIndicator(e);
     setActive(true);
-  }
+  };
+
+  const highlightIndicator = (e: React.DragEvent) => {
+    const indicators = getIndicators();
+    clearHighlights(indicators);
+    const el = getNearestIndicator(e, indicators);
+    el.element.style.opacity = "1";
+  };
+
+  const getIndicators = () => {
+    return Array.from(
+      document.querySelectorAll(
+        `[data-category="${categoryId}"]`
+      ) as NodeListOf<HTMLElement>
+    );
+  };
+
+  const clearHighlights = (els?: HTMLElement[]) => {
+    const indicators = els || getIndicators();
+    indicators.forEach((i) => (i.style.opacity = "0"));
+  };
+
+  const getNearestIndicator = (
+    e: React.DragEvent,
+    indicators: HTMLElement[]
+  ) => {
+    const DISTANCE_OFFSET = 50;
+    const el = indicators.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = e.clientY - (box.top + DISTANCE_OFFSET);
+        if (closest.offset < offset && offset < 0) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      },
+      {
+        offset: Number.NEGATIVE_INFINITY,
+        element: indicators[indicators.length - 1],
+      }
+    );
+    return el;
+  };
+
   const handleDragLeave = () => {
     setActive(false);
-  }
+    clearHighlights();
+  };
   const handleDrop = (e: React.DragEvent) => {
-    setActive(prev => false);
-  }
+    setActive(false);
+    clearHighlights();
+  };
 
   const filteredCards = cards.filter((card) => card.category_id === categoryId);
 
