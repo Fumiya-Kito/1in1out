@@ -169,7 +169,7 @@ function DragableCard({
         layoutId={_id}
         draggable
         onDragStart={(e) => handleDragStart(e, { _id, name, category_id })}
-        onTouchStart={(e) => handleDragStart(e, { _id, name, category_id })}
+        // onTouchStart={(e) => handleDragStart(e, { _id, name, category_id })}
         className="flex cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing"
       >
         <div className="flex-none w-10">{iconJsx}</div>
