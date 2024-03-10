@@ -55,7 +55,13 @@ function CategoryColumn({
   cards: Mono[];
   setCards: Dispatch<SetStateAction<Mono[]>>;
 }) {
+  /** Data */
+  const filteredCards = cards.filter((card) => card.category_id === categoryId);
+  /** States */
   const [active, setActive] = useState(false);
+  // const [isFull, setIsFull] = useState(filteredCards.length / upperLimit >= 1);
+
+  /** Handlers */
   const handleDragStart = (e: React.DragEvent, card: Mono) => {
     e.dataTransfer.setData("monoId", card._id);
   };
@@ -115,9 +121,35 @@ function CategoryColumn({
   const handleDrop = (e: React.DragEvent) => {
     setActive(false);
     clearHighlights();
+
+    const cardId = e.dataTransfer.getData("monoId");
+    const indicators = getIndicators();
+    const { element } = getNearestIndicator(e, indicators);
+    const before = element.dataset.before || '-1';
+
+    if (before !== cardId) {
+      let copy = [...cards];
+
+      let cardToTransfer = copy.find((c) => c._id === cardId);
+      if (!cardToTransfer) return;
+      // カテゴリ変更
+      cardToTransfer = { ...cardToTransfer, category_id: categoryId };
+      // 移動対象を削除
+      copy = copy.filter((c) => c._id !== cardId);
+
+      const moveToBack = before === '-1';
+      if (moveToBack) {
+        copy.push(cardToTransfer);
+      } else {
+        const insertAtIndex = copy.findIndex((el) => el._id === before);
+        if (insertAtIndex === undefined) return;
+
+        copy.splice(insertAtIndex, 0, cardToTransfer);
+      }
+      setCards(copy);
+    }
   };
 
-  const filteredCards = cards.filter((card) => card.category_id === categoryId);
 
   return (
     <div className="w-56 shrink-0 bg-stone-700 overflow-scroll flex flex-col h-full">
@@ -206,11 +238,11 @@ function AddCard({
   setCards: Dispatch<SetStateAction<Mono[]>>;
   isFull: boolean;
 }) {
-  const [available, setAvailable] = useState(isFull);
+  // const [available, setAvailable] = useState(isFull);
 
   return (
     <>
-      {available ? (
+      {isFull ? (
         <motion.div className="flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50">
           <span>Not Available</span>
           <LuRefreshCwOff />
