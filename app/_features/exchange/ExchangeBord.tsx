@@ -58,8 +58,10 @@ function CategoryColumn({
   /** Data */
   const filteredCards = cards.filter((card) => card.category_id === categoryId);
   /** States */
+  const isFull = filteredCards.length / upperLimit >= 1;
+  // const draggable = !isFull
+  // const [draggable, setDraggable] = useState(false);
   const [active, setActive] = useState(false);
-  // const [isFull, setIsFull] = useState(filteredCards.length / upperLimit >= 1);
 
   /** Handlers */
   const handleDragStart = (e: React.DragEvent, card: Mono) => {
@@ -67,6 +69,12 @@ function CategoryColumn({
   };
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
+    if (isFull) {
+      e.dataTransfer.dropEffect = 'none';
+      e.dataTransfer.effectAllowed = 'none';
+      return;
+    }
+
     highlightIndicator(e);
     setActive(true);
   };
@@ -125,7 +133,7 @@ function CategoryColumn({
     const cardId = e.dataTransfer.getData("monoId");
     const indicators = getIndicators();
     const { element } = getNearestIndicator(e, indicators);
-    const before = element.dataset.before || '-1';
+    const before = element.dataset.before || "-1";
 
     if (before !== cardId) {
       let copy = [...cards];
@@ -137,7 +145,7 @@ function CategoryColumn({
       // 移動対象を削除
       copy = copy.filter((c) => c._id !== cardId);
 
-      const moveToBack = before === '-1';
+      const moveToBack = before === "-1";
       if (moveToBack) {
         copy.push(cardToTransfer);
       } else {
@@ -149,7 +157,6 @@ function CategoryColumn({
       setCards(copy);
     }
   };
-
 
   return (
     <div className="w-56 shrink-0 bg-stone-700 overflow-scroll flex flex-col h-full">
@@ -165,13 +172,9 @@ function CategoryColumn({
         onDrop={handleDrop}
         className={`m-0 flex-1 w-full transition-colors ${
           active ? "bg-neutral-800/50" : "bg-neutral-800/0"
-        }`}
+        } `}
       >
-        <AddCard
-          category={categoryId}
-          setCards={setCards}
-          isFull={filteredCards.length / upperLimit >= 1}
-        />
+        <AddCard category={categoryId} setCards={setCards} isFull={isFull} />
         {filteredCards.map((card) => (
           <DragableCard
             key={card._id}
@@ -201,8 +204,7 @@ function DragableCard({
         layoutId={_id}
         draggable
         onDragStart={(e) => handleDragStart(e, { _id, name, category_id })}
-        // onTouchStart={(e) => handleDragStart(e, { _id, name, category_id })}
-        className="flex cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing"
+        className="flex cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing select-none"
       >
         <div className="flex-none w-10">{iconJsx}</div>
         <div className="flex-auto min-w-0">
