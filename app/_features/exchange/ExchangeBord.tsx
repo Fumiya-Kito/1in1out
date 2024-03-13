@@ -1,10 +1,18 @@
 "use client";
 
 import { Category, Mono } from "@/app/type";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import { LuRefreshCw, LuRefreshCwOff } from "react-icons/lu";
 import { motion } from "framer-motion";
-import { SaveButton } from "@/app/_features/exchange/SaveButton";
+import { LuSave } from "react-icons/lu";
+import Loading from "@/app/loading";
+import { useRouter } from "next/navigation";
 
 export default function ExchangeBord({
   allMonoList,
@@ -14,15 +22,36 @@ export default function ExchangeBord({
   allCategoryList: Category[];
 }) {
   const [cards, setCards] = useState(allMonoList);
+  const [initCards, setInitCards] = useState(allMonoList);
   const [isCardsChanged, setIsCardChanged] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const wishlist = allCategoryList.filter((ctg) => ctg._id === 1);
   const inventory = allCategoryList.filter((ctg) => ctg._id !== 1);
 
+  const handleSaveBtnClick = async () => {
+    setLoading(true);
+    await fetch("/api/monos", {
+      method: "PATCH",
+      body: JSON.stringify(cards),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    startTransition(() => {
+      router.refresh();
+      setInitCards(cards);
+      setIsCardChanged(false);
+      setLoading(false);
+    });
+  };
+
   useEffect(() => {
     // 変更を検知
-    const isChanged = JSON.stringify(cards) === JSON.stringify(allMonoList);
     if (cards !== undefined) {
+      const isChanged = JSON.stringify(cards) === JSON.stringify(initCards);
       setIsCardChanged(!isChanged);
     }
   }, [cards, allMonoList]);
@@ -56,7 +85,22 @@ export default function ExchangeBord({
       </div>
       {isCardsChanged ? (
         <div className="fixed right-6 bottom-6 shadow-md">
-          <SaveButton />
+          <button onClick={handleSaveBtnClick}>
+            {!loading ? (
+              <div className="flex flex sm:w-48 h-14 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
+                <>
+                  <LuSave size={24} />
+                  <p className="flex-auto text text-center hidden sm:block">
+                    Save Changes
+                  </p>
+                </>
+              </div>
+            ) : (
+              <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800/50 cursor-wait">
+                <Loading size={12} />
+              </div>
+            )}
+          </button>
         </div>
       ) : undefined}
     </>
@@ -185,7 +229,7 @@ function CategoryColumn({
     <div
       className={`${
         isWishList
-          ? "w-full rounded-lg shrink-0 bg-stone-900 overflow-scroll flex flex-col h-full sm:items-center sm:justify-between"
+          ? "w-full rounded-lg shrink-0 bg-neutral-900 overflow-scroll flex flex-col h-full sm:items-center sm:justify-between"
           : "w-56 rounded-lg shrink-0 bg-neutral-900 overflow-scroll flex flex-col h-full"
       } `}
     >

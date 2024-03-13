@@ -3,7 +3,6 @@ import getAllCategories from "./_lib/categories/getAllCategories";
 import { Category, Mono } from "./type";
 import getMonosByCategory from "./_lib/monos/getMonosByCategory";
 import ExchangeBord from "./_features/exchange/ExchangeBord";
-import { SaveButton } from "./_features/exchange/SaveButton";
 
 export default async function ExchangePage() {
   const allCategoryList: Category[] = await getAllCategories();
