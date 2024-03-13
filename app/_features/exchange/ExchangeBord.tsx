@@ -1,9 +1,10 @@
 "use client";
 
 import { Category, Mono } from "@/app/type";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { LuRefreshCw, LuRefreshCwOff } from "react-icons/lu";
 import { motion } from "framer-motion";
+import { SaveButton } from "@/app/_features/exchange/SaveButton";
 
 export default function ExchangeBord({
   allMonoList,
@@ -13,9 +14,18 @@ export default function ExchangeBord({
   allCategoryList: Category[];
 }) {
   const [cards, setCards] = useState(allMonoList);
+  const [isCardsChanged, setIsCardChanged] = useState(false);
 
   const wishlist = allCategoryList.filter((ctg) => ctg._id === 1);
   const inventory = allCategoryList.filter((ctg) => ctg._id !== 1);
+
+  useEffect(() => {
+    // 変更を検知
+    const isChanged = JSON.stringify(cards) === JSON.stringify(allMonoList);
+    if (cards !== undefined) {
+      setIsCardChanged(!isChanged);
+    }
+  }, [cards, allMonoList]);
 
   return (
     <>
@@ -44,6 +54,11 @@ export default function ExchangeBord({
           />
         ))}
       </div>
+      {isCardsChanged ? (
+        <div className="fixed right-6 bottom-6 shadow-md">
+          <SaveButton />
+        </div>
+      ) : undefined}
     </>
   );
 }
