@@ -13,6 +13,8 @@ import { motion } from "framer-motion";
 import { LuSave } from "react-icons/lu";
 import Loading from "@/app/loading";
 import { useRouter } from "next/navigation";
+import { FiTrash } from "react-icons/fi";
+import { FaFire } from "react-icons/fa6";
 
 export default function ExchangeBord({
   allMonoList,
@@ -22,6 +24,7 @@ export default function ExchangeBord({
   allCategoryList: Category[];
 }) {
   const [cards, setCards] = useState(allMonoList);
+  const [monoIdsInTrash, setMonoIdsInTrash] = useState<string[]>([]);
   const [initCards, setInitCards] = useState(allMonoList);
   const [isCardsChanged, setIsCardChanged] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,18 +36,35 @@ export default function ExchangeBord({
   const inventory = allCategoryList.filter((ctg) => ctg._id !== 1);
 
   const handleSaveBtnClick = async () => {
+    const cardsDifference = cards.reduce((result: Mono[], curItem: Mono) => {
+      const changeFound = initCards.find(
+        (initMono) =>
+          initMono._id === curItem._id &&
+          initMono.category_id !== curItem.category_id
+      );
+      if (changeFound) result.push(curItem);
+      return result;
+    }, []);
+
     setLoading(true);
-    await fetch("/api/monos", {
-      method: "PATCH",
-      body: JSON.stringify(cards),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // 差分を更新・削除
+    if (cardsDifference.length !== 0 || monoIdsInTrash.length !== 0) {
+      await fetch("/api/monos", {
+        method: "PATCH",
+        body: JSON.stringify({
+          updateMonos: cardsDifference,
+          deleteIds: monoIdsInTrash,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
     startTransition(() => {
       router.refresh();
       setInitCards(cards);
       setIsCardChanged(false);
+      setMonoIdsInTrash([]);
       setLoading(false);
     });
   };
@@ -108,13 +128,62 @@ export default function ExchangeBord({
       ) : undefined}
 
       {isDragging && (
-        <div className="fixed left-6 bottom-6 shadow-md">
-          <p className="bg-red-800">DELETE</p>
+        <div className="fixed left-6 bottom-8 shadow-md">
+          <Trashcan
+            setCards={setCards}
+            setIsDragging={setIsDragging}
+            setMonoIdsInTrash={setMonoIdsInTrash}
+          />
         </div>
       )}
     </>
   );
 }
+
+const Trashcan = ({
+  setCards,
+  setIsDragging,
+  setMonoIdsInTrash,
+}: {
+  setCards: Dispatch<SetStateAction<Mono[]>>;
+  setIsDragging: Dispatch<SetStateAction<boolean>>;
+  setMonoIdsInTrash: Dispatch<SetStateAction<string[]>>;
+}) => {
+  const [active, setActive] = useState(false);
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setActive(true);
+  };
+
+  const handleDragLeave = () => {
+    setActive(false);
+  };
+
+  const handleDragEnd = (e: React.DragEvent) => {
+    const cardId = e.dataTransfer.getData("monoId");
+
+    setCards((prev) => prev.filter((mono) => mono._id !== cardId));
+    setMonoIdsInTrash((prev) => [...prev, cardId]);
+    setActive(false);
+    setIsDragging(false);
+  };
+
+  return (
+    <div
+      onDrop={handleDragEnd}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      className={`grid h-16 w-16 md:h-32 md:w-32 shrink-0 place-content-center rounded border text-3xl ${
+        active
+          ? "border-red-800 bg-red-800/20 text-red-500"
+          : "border-neutral-500 bg-neutral-500/20 text-neutral-500"
+      }`}
+    >
+      {active ? <FaFire className="animate-bounce" /> : <FiTrash />}
+    </div>
+  );
+};
 
 function CategoryColumn({
   title = "Nameless",

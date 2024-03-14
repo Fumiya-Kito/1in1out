@@ -5,22 +5,34 @@ import { Mono } from "@/app/type";
 async function PATCH(request: Request) {
   try {
     // // リクエストボディの取得
-    const body: Mono[] = await request.json();
+    const {
+      updateMonos,
+      deleteIds,
+    }: { updateMonos: Mono[]; deleteIds: string[] } = await request.json();
 
     const client = await MongoClient.connect(`${process.env.MONGO_URI}`);
     const db = client.db();
 
-    const bulkOperations = body.map((mono) => {
-      const {_id, ...setterObj} = mono;
+    const bulkOperations: any[] = [];
 
-      return {
+    updateMonos.forEach((mono) => {
+      const { _id, ...setterObj } = mono;
+      bulkOperations.push({
         updateOne: {
           filter: { _id: new ObjectId(_id) },
           update: {
             $set: setterObj, // 各更新内容をそのまま設定
           },
         },
-      };
+      });
+    });
+
+    deleteIds.forEach((id) => {
+      bulkOperations.push({
+        deleteOne: {
+          filter: { _id: new ObjectId(id) },
+        },
+      });
     });
 
     const response = await db.collection("monos").bulkWrite(bulkOperations);
