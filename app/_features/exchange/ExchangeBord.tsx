@@ -27,6 +27,7 @@ export default function ExchangeBord({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [isDragging, setIsDragging] = useState(false);
 
   const wishlist = allCategoryList.filter((ctg) => ctg._id === 1);
   const inventory = allCategoryList.filter((ctg) => ctg._id !== 1);
@@ -67,6 +68,7 @@ export default function ExchangeBord({
             upperLimit={wishlist[0].upper_limit}
             cards={cards}
             setCards={setCards}
+            setIsDragging={setIsDragging}
             isWishList={true}
           />
         )}
@@ -80,6 +82,7 @@ export default function ExchangeBord({
             upperLimit={category.upper_limit}
             cards={cards}
             setCards={setCards}
+            setIsDragging={setIsDragging}
           />
         ))}
       </div>
@@ -103,6 +106,12 @@ export default function ExchangeBord({
           </button>
         </div>
       ) : undefined}
+
+      {isDragging && (
+        <div className="fixed left-6 bottom-6 shadow-md">
+          <p className="bg-red-800">DELETE</p>
+        </div>
+      )}
     </>
   );
 }
@@ -114,6 +123,7 @@ function CategoryColumn({
   upperLimit,
   cards,
   setCards,
+  setIsDragging,
   isWishList = false,
 }: {
   title?: string;
@@ -122,6 +132,7 @@ function CategoryColumn({
   upperLimit: number;
   cards: Mono[];
   setCards: Dispatch<SetStateAction<Mono[]>>;
+  setIsDragging: Dispatch<SetStateAction<boolean>>;
   isWishList?: boolean;
 }) {
   /** Data */
@@ -133,6 +144,10 @@ function CategoryColumn({
   /** Handlers */
   const handleDragStart = (e: React.DragEvent, card: Mono) => {
     e.dataTransfer.setData("monoId", card._id);
+    setIsDragging(true);
+  };
+  const handleDragEnd = (e: React.DragEvent) => {
+    setIsDragging(false);
   };
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -196,6 +211,7 @@ function CategoryColumn({
   const handleDrop = (e: React.DragEvent) => {
     setActive(false);
     clearHighlights();
+    setIsDragging(false);
 
     const cardId = e.dataTransfer.getData("monoId");
     const indicators = getIndicators();
@@ -247,6 +263,7 @@ function CategoryColumn({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
+        onDragEnd={handleDragEnd}
         className={`m-0 transition-colors flex-1 w-full ${
           isWishList && "sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-2/5 2xl:w-1/3"
         } ${active ? "bg-neutral-800/50" : "bg-neutral-800/0"}`}
