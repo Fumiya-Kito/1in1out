@@ -13,11 +13,15 @@ export default async function InventoryPage({
   // data fetchingを行う
   const { slug } = params;
   const [categoryId, _] = slug.split("_");
+  const isWishList = +categoryId === 1;
   const monoList = await getMonosByCategory(categoryId);
   const allCategoryList = await getAllCategories();
+
   const pageCategory = allCategoryList.find((ctg) => ctg._id === +categoryId)!;
 
-  const formProps = {categoryId: pageCategory._id.toString(), categoryList: allCategoryList };
+  const formProps = pageCategory
+    ? { categoryId: pageCategory._id.toString(), categoryList: allCategoryList }
+    : undefined;
 
   return (
     <>
@@ -28,16 +32,18 @@ export default async function InventoryPage({
         <div className="px-2">
           <h1 className="sm:text-lg">{pageCategory?.name.toUpperCase()}</h1>
         </div>
-        <div className="flex-none ml-auto">
-          <CategoryForm type="UPDATE" data={pageCategory} />
-          <DeleteForm model={pageCategory} pk={categoryId} />
-        </div>
+        {!isWishList && (
+          <div className="flex-none ml-auto">
+            <CategoryForm type="UPDATE" data={pageCategory} />
+            {formProps && <DeleteForm model={pageCategory} pk={categoryId} />}
+          </div>
+        )}
       </section>
       <section
         id="mono-list"
         className="z-10 w-full items-center justify-between font-mono text-sm"
       >
-        <MonoLinkList data={monoList} formProps={formProps}/>
+        {formProps && <MonoLinkList data={monoList} formProps={formProps} />}
       </section>
       <div className="fixed right-6 bottom-6 shadow-md">
         <MonoForm

@@ -107,7 +107,7 @@ export default function ExchangeBord({
         ))}
       </div>
       {isCardsChanged ? (
-        <div className="fixed right-6 bottom-6 shadow-md">
+        <div className="fixed right-2 bottom-2 sm:right-6 sm:bottom-6 shadow-md">
           <button onClick={handleSaveBtnClick}>
             {!loading ? (
               <div className="flex flex sm:w-48 h-14 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
@@ -128,7 +128,7 @@ export default function ExchangeBord({
       ) : undefined}
 
       {isDragging && (
-        <div className="fixed left-6 bottom-8 shadow-md">
+        <div className="fixed left-2 bottom-4 sm:left-6 sm:bottom-8 shadow-md">
           <Trashcan
             setCards={setCards}
             setIsDragging={setIsDragging}
@@ -174,7 +174,7 @@ const Trashcan = ({
       onDrop={handleDragEnd}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
-      className={`grid h-16 w-16 md:h-32 md:w-32 shrink-0 place-content-center rounded border text-3xl ${
+      className={`grid h-14 w-14 md:h-32 md:w-32 shrink-0 place-content-center rounded border text-3xl ${
         active
           ? "border-red-800 bg-red-800/20 text-red-500"
           : "border-neutral-500 bg-neutral-500/20 text-neutral-500"
