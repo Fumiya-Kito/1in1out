@@ -42,6 +42,10 @@ export default function CategoryForm(props: {
       console.log("invalid Input");
       return false;
     }
+    if (+enteredUpperLimit < 1) {
+      upperLimitInputRef.current.value = "1";
+      return false;
+    }
     if (+enteredUpperLimit > 999) {
       upperLimitInputRef.current.value = "999";
       return false;
@@ -111,8 +115,9 @@ export default function CategoryForm(props: {
           id="upper_limit"
           placeholder="12"
           aria-label="upper_limit"
-          defaultValue={props.data?.upper_limit}
+          defaultValue={props.data?.upper_limit || 1}
           ref={upperLimitInputRef}
+          min={1}
           max={999}
           maxLength={3}
           className="p-2 my-1 text-black border w-64 rounded-md"
