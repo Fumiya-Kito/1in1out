@@ -110,7 +110,7 @@ export default function ExchangeBord({
         <div className="fixed right-2 bottom-2 sm:right-6 sm:bottom-6 shadow-md">
           <button onClick={handleSaveBtnClick}>
             {!loading ? (
-              <div className="flex flex sm:w-48 h-14 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
+              <div className="flex sm:w-48 h-14 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
                 <>
                   <LuSave size={24} />
                   <p className="flex-auto text text-center hidden sm:block">
