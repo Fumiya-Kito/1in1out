@@ -110,7 +110,7 @@ export default function ExchangeBord({
         <div className="fixed right-2 bottom-2 sm:right-6 sm:bottom-6 shadow-md">
           <button onClick={handleSaveBtnClick}>
             {!loading ? (
-              <div className="flex sm:w-48 h-14 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
+              <div className="flex sm:w-48 h-14 p-4 m-2 bg-white text-black rounded-full sm:rounded-lg">
                 <>
                   <LuSave size={24} />
                   <p className="flex-auto text text-center hidden sm:block">
@@ -389,7 +389,7 @@ function DropIndicator({
     <div
       data-before={beforeId || "-1"}
       data-category={category}
-      className="h-0.5 w-full bg-violet-400 opacity-0"
+      className="h-0.5 w-full bg-red-700 opacity-0"
     />
   );
 }

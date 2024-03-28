@@ -20,7 +20,7 @@ export default function CategoryCard({
     <>
       <div
         onClick={clickHandler}
-        className="flex items-center px-2 py-3 bg-sky-950 hover:bg-sky-900 cursor-pointer"
+        className="flex items-center px-2 py-3 bg-neutral-900 hover:bg-neutral-600/50 cursor-pointer"
       >
         <div className="flex-none w-10">{model.iconJsx}</div>
         <div className="flex-auto text-base min-w-0">
@@ -31,7 +31,7 @@ export default function CategoryCard({
         </div>
       </div>
       {isOpen && (
-        <div className="p-2  bg-gray-900">
+        <div className="p-2  bg-neutral-950">
           <div>
             <p>CategoryId: {model.category_id}</p>
             <p>Reason: {model.reason}</p>

@@ -150,7 +150,7 @@ export default function CategoryForm(props: {
       ) : (
         <button onClick={() => setIsOpen((prevState) => !prevState)}>
           {props.type === "CREATE" ? (
-            <div className="flex sm:w-48 p-4 m-2 bg-cyan-500 text-black rounded-full sm:rounded-lg">
+            <div className="flex sm:w-48 p-4 m-2 bg-white text-black rounded-full sm:rounded-lg">
               <div className="flex-none sm:w-8">
                 <GoPlusCircle size={24} />
               </div>
@@ -159,7 +159,7 @@ export default function CategoryForm(props: {
               </div>
             </div>
           ) : (
-            <div className="p-2 my-0.5 hover:bg-green-700 hover:opacity-90 rounded-lg">
+            <div className="p-2 my-0.5 hover:bg-neutral-600/50 hover:opacity-90 rounded-lg">
               <FiEdit size={18} />
             </div>
           )}

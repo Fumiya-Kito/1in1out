@@ -78,7 +78,7 @@ export default function Modal({
                       <button
                         disabled={loading}
                         onClick={handleSubmit}
-                        className="p-2 m-2 bg-cyan-500 text-white rounded-lg"
+                        className="p-2 my-4 bg-neutral-800 text-white rounded-lg"
                       >
                         {label}
                       </button>
