@@ -9,7 +9,7 @@ function MenuItem ({ label, onClick }: MenuItemProps) {
   return (
     <div
       onClick={onClick}
-      className="px-2 py-1 text-enter"
+      className="p-1 text-enter hover:bg-neutral-700"
     >
       {label} 
     </div>
