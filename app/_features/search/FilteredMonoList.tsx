@@ -33,14 +33,14 @@ export default function FilteredMonoLinkList({
   }, [enteredName])
 
   return (
-    <>
+    <div className="max-w-4xl m-auto">
       <div>
         <input
           type="text"
           placeholder="Search by Mono Name..."
           value={enteredName}
           onChange={(e) => setEnteredName(e.target.value)}
-          className="text-black"
+          className="w-full max-w-sm p-2 my-2 text-white bg-neutral-700 rounded-lg border border-neutral-400 focus:bg-neutral-900 outline-transparent outline-0"
         />
       </div>
       <li className="list-none">
@@ -56,6 +56,6 @@ export default function FilteredMonoLinkList({
           </ul>
         ))}
       </li>
-    </>
+    </div>
   );
 }
