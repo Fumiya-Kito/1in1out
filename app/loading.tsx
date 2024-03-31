@@ -1,4 +1,4 @@
-const Loading = ({ size = 12 }: { size?: number }) => {
+const Loading = ({ size = 8 }: { size?: number }) => {
   return (
     <div className="flex justify-center">
       <svg
