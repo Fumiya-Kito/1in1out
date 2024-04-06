@@ -119,9 +119,16 @@ export default function ExchangeBord({
                 </>
               </div>
             ) : (
-              <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800/50 cursor-wait">
-                <Loading size={12} />
-              </div>
+              <>
+                <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800/50 cursor-wait">
+                  <Loading size={12} />
+                </div>
+                <div className="flex sm:w-48 h-14 p-4 m-2 bg-white text-black rounded-full sm:rounded-lg">
+                  <p className="flex-auto text text-center hidden sm:block">
+                    Processing...
+                  </p>
+                </div>
+              </>
             )}
           </button>
         </div>
@@ -393,11 +400,7 @@ function DropIndicator({
   );
 }
 
-function Status({
-  isFull,
-}: {
-  isFull: boolean;
-}) {
+function Status({ isFull }: { isFull: boolean }) {
   return (
     <>
       {isFull ? (

@@ -83,7 +83,9 @@ export default function Modal({
                         {label}
                       </button>
                     ) : (
-                      <Loading />
+                      <div className="p-2 my-4 rounded-lg">
+                        <Loading />
+                      </div>
                     )}
                   </div>
                 </div>
