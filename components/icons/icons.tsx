@@ -34,6 +34,7 @@ import {
   CiDesktopMouse1,
   CiCreditCard1,
   CiGlass,
+  CiHeart,
 } from "react-icons/ci";
 import { SlScreenTablet, SlEarphones, SlEyeglass } from "react-icons/sl";
 import { CgBowl } from "react-icons/cg";
@@ -95,6 +96,7 @@ export const iconFormOptions = [
   { value: "spraycan", label: <LiaSprayCanSolid color={"#000"} /> },
   { value: "pencilruler", label: <RiPencilRuler2Line color={"#000"} /> },
   { value: "blank", label: <VscBlank color={"#000"} /> },
+  { value: "heart", label: <CiHeart color={"#000"} /> },
 ];
 
 export function getIconByString(target: string, size?: number) {
@@ -144,6 +146,7 @@ export function getIconByString(target: string, size?: number) {
     { key: "pencilruler", jsx: <RiPencilRuler2Line size={size} /> },
     { key: "blank", jsx: <VscBlank size={size} /> },
     { key: "blanket", jsx: <BiBlanket size={size} /> },
+    { key: "heart", jsx: <CiHeart size={size} /> },
   ];
 
   return allIcons.find((icon) => icon.key === target)?.jsx;

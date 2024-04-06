@@ -104,6 +104,7 @@ export default function MonoForm({
         options={categoryOptions}
         onChange={(value) => (value ? setSelectedCategory(value) : undefined)}
         defaultValue={defaultCategory}
+        isDisabled={!!defaultCategory}
         placeholder="Select Category..."
         className="w-64 my-1 text-black"
       />
