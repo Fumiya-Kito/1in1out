@@ -45,13 +45,15 @@ export default async function InventoryPage({
       >
         {formProps && <MonoLinkList data={monoList} formProps={formProps} />}
       </section>
-      <div className="fixed right-6 bottom-6 shadow-md">
-        <MonoForm
-          type="CREATE"
-          categoryList={allCategoryList}
-          categoryId={categoryId}
-        />
-      </div>
+      {monoList.length < pageCategory.upper_limit && (
+        <div className="fixed right-6 bottom-6 shadow-md">
+          <MonoForm
+            type="CREATE"
+            categoryList={allCategoryList}
+            categoryId={categoryId}
+          />
+        </div>
+      )}
     </>
   );
 }
