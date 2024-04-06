@@ -337,7 +337,7 @@ function CategoryColumn({
           isWishList && "sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-2/5 2xl:w-1/3"
         } ${active ? "bg-neutral-800/50" : "bg-neutral-800/0"}`}
       >
-        <AddCard category={categoryId} setCards={setCards} isFull={isFull} />
+        <Status isFull={isFull} />
         {filteredCards.map((card) => (
           <DragableCard
             key={card._id}
@@ -356,7 +356,6 @@ function DragableCard({
   name,
   iconJsx,
   category_id,
-  category_name,
   handleDragStart,
 }: Mono & { handleDragStart: Function }) {
   return (
@@ -394,17 +393,11 @@ function DropIndicator({
   );
 }
 
-function AddCard({
-  category,
-  setCards,
+function Status({
   isFull,
 }: {
-  category: number;
-  setCards: Dispatch<SetStateAction<Mono[]>>;
   isFull: boolean;
 }) {
-  // const [available, setAvailable] = useState(isFull);
-
   return (
     <>
       {isFull ? (

@@ -1,15 +1,11 @@
-import getAllCategories from "./_lib/categories/getAllCategories";
-import { Category, Mono } from "./type";
-import getMonosByCategory from "./_lib/monos/getMonosByCategory";
-import ExchangeBord from "./_features/exchange/ExchangeBord";
+import { Suspense } from "react";
+import ExchangeWrapper from "@/app/_features/exchange/ExchangeWrapper";
+import ExchangeFallback from "@/app/_features/exchange/ExchangeFallback";
 
-export default async function ExchangePage() {
-  const allCategoryList: Category[] = await getAllCategories();
-  const allMonoList: Mono[] = await getMonosByCategory(undefined);
-
+export default function ExchangePage() {
   return (
-    <>
-      <ExchangeBord allMonoList={allMonoList} allCategoryList={allCategoryList} />
-    </>
+    <Suspense fallback={<ExchangeFallback />}>
+      <ExchangeWrapper />
+    </Suspense>
   );
 }
